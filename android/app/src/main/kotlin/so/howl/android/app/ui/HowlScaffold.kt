@@ -11,7 +11,9 @@ import so.howl.android.app.navigation.HowlRouting
 @Composable
 fun HowlScaffold() {
     val navController = rememberNavController()
-    Scaffold { innerPadding ->
+    Scaffold(
+        bottomBar = { HowlBottomBar(navController = navController) }
+    ) { innerPadding ->
         HowlRouting(navController = navController, innerPadding = innerPadding)
     }
 }

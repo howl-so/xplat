@@ -1,6 +1,11 @@
 package so.howl.android.common.navigation
 
-import androidx.annotation.DrawableRes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.ui.graphics.vector.ImageVector
 
 private const val HOME_ROUTE = "/home"
 private const val ACCOUNT_ROUTE = "/account"
@@ -12,9 +17,9 @@ private const val ACCOUNT = "ACCOUNT"
 sealed class Screen(
     val route: String,
     val title: String,
-    @DrawableRes val iconSelected: Int,
-    @DrawableRes val iconNotSelected: Int
+    val iconSelected: ImageVector,
+    val iconNotSelected: ImageVector
 ) {
-    object Home : Screen(HOME_ROUTE, HOME, R.drawable.ic_activity_fill, R.drawable.ic_activity_line)
-    object Account : Screen(ACCOUNT_ROUTE, ACCOUNT, R.drawable.ic_person_fill, R.drawable.ic_person_fill)
+    object Home : Screen(HOME_ROUTE, HOME, Icons.Filled.Home, Icons.Outlined.Home)
+    object Account : Screen(ACCOUNT_ROUTE, ACCOUNT, Icons.Filled.Person, Icons.Outlined.Person)
 }

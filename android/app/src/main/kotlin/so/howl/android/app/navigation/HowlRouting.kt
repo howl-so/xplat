@@ -16,5 +16,9 @@ fun HowlRouting(navController: NavHostController, innerPadding: PaddingValues) {
         composable(Screen.Home.route) {
             Text(text = "Howl")
         }
+
+        composable(Screen.Account.route) {
+            Text(text = "Account")
+        }
     }
 }
