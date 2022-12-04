@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id("org.jetbrains.kotlin.multiplatform") version "1.7.21" apply false
+    id("org.jetbrains.kotlin.multiplatform") version libs.versions.kotlin.get() apply false
 }
 
 

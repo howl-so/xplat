@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     kotlin("plugin.serialization")
@@ -25,7 +27,30 @@ android {
             excludes += "META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 }
 
 dependencies {
+    implementation(project(":android:common:coroutines"))
+    implementation(project(":android:common:hig"))
+    implementation(project(":android:common:navigation"))
+    implementation(project(":android:common:scoping"))
+
+    implementation(project(":common:api"))
+    implementation(project(":common:entities"))
+
+    implementation(libs.activity.compose)
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.navigation)
+
+    implementation(libs.dagger.dagger)
+    kapt(libs.dagger.compiler)
 }

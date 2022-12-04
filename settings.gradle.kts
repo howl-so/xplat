@@ -18,3 +18,10 @@ pluginManagement {
 rootProject.name = "howl"
 
 include(":android:app")
+include(":android:common:scoping")
+include(":android:common:coroutines")
+include(":android:common:navigation")
+include(":android:common:hig")
+
+include(":common:api")
+include(":common:entities")
