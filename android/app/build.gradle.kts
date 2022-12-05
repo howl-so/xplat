@@ -42,12 +42,16 @@ dependencies {
     implementation(project(":android:common:navigation"))
     implementation(project(":android:common:scoping"))
 
+    implementation(project(":android:feature:account"))
+    implementation(project(":android:feature:home"))
+
     implementation(project(":common:api"))
     implementation(project(":common:entities"))
     implementation(project(":common:store"))
 
     implementation(libs.activity.compose)
     implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.fragment)
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
     implementation(libs.compose.navigation)

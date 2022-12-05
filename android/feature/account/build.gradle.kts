@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -17,12 +19,20 @@ android {
         minSdk = 24
         targetSdk = 33
     }
+
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 }
 
 dependencies {
     implementation(project(":common:entities"))
-    implementation(project(":common:store"))
 
     implementation(libs.dagger.dagger)
     kapt(libs.dagger.compiler)
+
+    implementation(libs.compose.material3)
 }
