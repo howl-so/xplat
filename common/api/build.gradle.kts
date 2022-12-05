@@ -24,4 +24,11 @@ kotlin {
 android {
     namespace = "so.howl.common.api"
     compileSdk = libs.versions.android.compile.sdk.get().toInt()
+
+    compileSdk = libs.versions.android.compile.sdk.get().toInt()
+
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 33
+    }
 }

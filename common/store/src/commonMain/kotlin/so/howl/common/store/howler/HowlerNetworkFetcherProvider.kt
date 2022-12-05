@@ -5,7 +5,7 @@ import so.howl.common.api.HowlerApi
 
 class HowlerNetworkFetcherProvider(private val api: HowlerApi) {
     fun provide(): NetworkFetcher<HowlerMarketKey, HowlerMarketInput, HowlerMarketOutput> = NetworkFetcher.by(
-        get = { key -> so.howl.common.store.howl_user.get(api) },
+        get = { key -> (key as? HowlerMarketKey.Read).get(api) },
         post = { key, input -> (key as? HowlerMarketKey.Write).post(api, input) },
         converter = {
             when (it) {

@@ -1,5 +1,6 @@
 package so.howl.common.api
 
+import so.howl.common.api.fake.FakeHowlUsers
 import so.howl.common.entities.HowlAccount
 import so.howl.common.entities.HowlUser
 import so.howl.common.entities.HowlUserId
@@ -8,7 +9,8 @@ import so.howl.common.entities.HowlerId
 
 class RealHowlApi : HowlApi {
     override suspend fun getHowlUser(howlUserId: HowlUserId): HowlUser {
-        TODO("Not yet implemented")
+        // TODO(matt-ramotar)
+        return FakeHowlUsers.get(howlUserId)
     }
 
     override suspend fun updateAccount(howlUserId: HowlUserId, account: HowlAccount): Boolean {

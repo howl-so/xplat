@@ -44,6 +44,7 @@ dependencies {
 
     implementation(project(":common:api"))
     implementation(project(":common:entities"))
+    implementation(project(":common:store"))
 
     implementation(libs.activity.compose)
     implementation(libs.androidx.viewmodel)
