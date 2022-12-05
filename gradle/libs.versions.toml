@@ -18,7 +18,10 @@ kmm-bridge = "0.3.2"
 kotlin = "1.7.10"
 kotlinx-serialization = "1.4.0"
 molecule = "0.6.1"
-store = "5.0.0-SNAPSHOT"
+store4 = "4.0.7"
+store5 = "5.0.0-alpha02"
+store-snapshot = "5.0.0-SNAPSHOT"
+sqldelight = "1.5.3"
 okio = "3.2.0"
 okHttp = "4.9.1"
 viewmodel = "2.6.0-alpha02"
@@ -37,7 +40,7 @@ compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compos
 compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose-androidx" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "compose-androidx" }
-compose-navigation = {group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation"}
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
 
 dagger-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
@@ -55,11 +58,26 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 okio-core = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 okHttp-core = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
 
-store4 = { group = "com.dropbox.mobile.store", name = "store4", version.ref = "store" }
-store5 = { group = "com.dropbox.mobile.store", name = "store4", version.ref = "store" }
+store4 = { group = "org.mobilenativefoundation.store", name = "store4", version.ref = "store4" }
+store5 = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store5" }
+store5-js = { group = "org.mobilenativefoundation.store", name = "store5-js", version.ref = "store5" }
+
+
+store5-snapshot = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store-snapshot" }
+store5-snapshot-ios-arm64 = { group = "org.mobilenativefoundation.store", name = "store5-iosarm64", version.ref = "store-snapshot" }
+store5-snapshot-ios-x64 = { group = "org.mobilenativefoundation.store", name = "store5-iosx64", version.ref = "store-snapshot" }
+store5-snapshot-js = { group = "org.mobilenativefoundation.store", name = "store5-js", version.ref = "store-snapshot" }
+store5-snapshot-jvm = { group = "org.mobilenativefoundation.store", name = "store5-jvm", version.ref = "store-snapshot" }
+
+sqldelight-android-driver = { group = "com.squareup.sqldelight", name = "android-driver", version.ref = "sqldelight" }
+sqldelight-coroutines-extensions = { group = "com.squareup.sqldelight", name = "coroutines-extensions", version.ref = "sqldelight" }
+sqldelight-gradle-plugin = { group = "com.squareup.sqldelight", name = "gradle-plugin", version.ref = "sqldelight" }
+sqldelight-native-driver = { group = "com.squareup.sqldelight", name = "native-driver", version.ref = "sqldelight" }
+sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", version.ref = "sqldelight" }
 
 zipline-zipline = { group = "app.cash.zipline", name = "zipline", version.ref = "zipline" }
 zipline-loader = { group = "app.cash.zipline", name = "zipline-loader", version.ref = "zipline" }
 
 [plugins]
 molecule = { id = "app.cash.molecule", version.ref = "molecule" }
+sqldelight = { id = "com.squareup.slqdelight", version.ref = "sqldelight" }

@@ -7,8 +7,10 @@ kotlin {
     android()
     js {
         browser()
+        nodejs()
     }
     ios()
+    jvm()
 
     sourceSets {
         val commonMain by getting {

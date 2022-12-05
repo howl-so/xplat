@@ -25,3 +25,4 @@ include(":android:common:hig")
 
 include(":common:api")
 include(":common:entities")
+include(":common:store")

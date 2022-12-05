@@ -9,7 +9,8 @@
         android:name=".HowlApp"
         android:label="Howl"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:icon="@mipmap/ic_launcher_round">
 
         <activity
             android:name=".HowlMainActivity"
