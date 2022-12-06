@@ -45,7 +45,6 @@ dependencies {
     implementation(project(":android:feature:account"))
     implementation(project(":android:feature:home"))
 
-    implementation(project(":common:api"))
     implementation(project(":common:entities"))
     implementation(project(":common:store"))
 

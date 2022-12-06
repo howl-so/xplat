@@ -14,7 +14,7 @@ import so.howl.common.entities.HowlUser
 import so.howl.common.entities.Howler
 
 @Composable
-fun HowlHomeTab(user: HowlUser, howlerApi: HowlerApi) {
+fun HowlHomeTab(user: HowlUser, howlerApi: so.howl.common.api.HowlerApi) {
 
     Column(
         modifier = Modifier.fillMaxSize(),

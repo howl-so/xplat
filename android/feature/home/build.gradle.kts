@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation(project(":common:entities"))
-    implementation(project(":common:api"))
+    implementation(project(":common:store"))
 
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)

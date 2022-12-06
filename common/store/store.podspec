@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'HowlStore'
+    spec.summary                  = 'StoreKit'
     spec.vendored_frameworks      = 'build/cocoapods/framework/StoreKit.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '13'

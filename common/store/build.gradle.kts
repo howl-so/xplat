@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("co.touchlab.faktory.kmmbridge")
+    kotlin("plugin.serialization")
     `maven-publish`
     kotlin("native.cocoapods")
     alias(libs.plugins.native.coroutines)
@@ -26,11 +27,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":common:api"))
                 implementation(project(":common:entities"))
                 implementation(libs.sqldelight.runtime)
                 implementation(libs.sqldelight.coroutines.extensions)
                 api(libs.store5)
+                implementation(libs.kotlinx.serialization.core)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
             }
         }
 

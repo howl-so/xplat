@@ -29,6 +29,5 @@ include(":android:common:hig")
 include(":android:feature:account")
 include(":android:feature:home")
 
-include(":common:api")
 include(":common:entities")
 include(":common:store")
