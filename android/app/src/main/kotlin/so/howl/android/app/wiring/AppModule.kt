@@ -3,6 +3,10 @@ package so.howl.android.app.wiring
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.mobilenativefoundation.store.store5.Market
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
@@ -23,14 +27,23 @@ import javax.inject.Named
 @Module
 @ContributesTo(AppScope::class)
 object AppModule {
-    @Provides
-    fun provideHowlApi(): HowlApi = RealHowlApi()
+
+    private val client = HttpClient {
+        install(ContentNegotiation) {
+            json(Json {
+                isLenient = true
+            })
+        }
+    }
 
     @Provides
-    fun provideHowlUserApi(): HowlUserApi = RealHowlApi()
+    fun provideHowlApi(): HowlApi = RealHowlApi(client)
 
     @Provides
-    fun provideHowlerApi(): HowlerApi = RealHowlApi()
+    fun provideHowlUserApi(): HowlUserApi = RealHowlApi(client)
+
+    @Provides
+    fun provideHowlerApi(): HowlerApi = RealHowlApi(client)
 
     @SingleIn(AppScope::class)
     @Named(HOWL_USER_MARKET)

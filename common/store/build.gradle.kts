@@ -1,12 +1,26 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("co.touchlab.faktory.kmmbridge")
+    `maven-publish`
+    kotlin("native.cocoapods")
 }
 
 kotlin {
     android()
     iosArm64()
     iosX64()
+
+    cocoapods {
+        summary = "HowlStore"
+        homepage = "https://github.com/matt-ramotar/howl"
+        ios.deploymentTarget = "13"
+        version = "0.0.1"
+
+        framework {
+            baseName = "StoreKit"
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -42,4 +56,13 @@ android {
         minSdk = 24
         targetSdk = 33
     }
+}
+
+addGithubPackagesRepository()
+kmmbridge {
+    frameworkName.set("StoreKit")
+    githubReleaseArtifacts()
+    githubReleaseVersions()
+    versionPrefix.set("0.0")
+    spm()
 }

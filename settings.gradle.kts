@@ -4,6 +4,9 @@ pluginManagement {
     plugins {
         val composeVersion = extra["composeVersion"] as String
         id("org.jetbrains.compose").version(composeVersion)
+
+        val kmmBridgeVersion = extra["kmmBridgeVersion"] as String
+        id("co.touchlab.faktory.kmmbridge").version(kmmBridgeVersion)
     }
 
     repositories {

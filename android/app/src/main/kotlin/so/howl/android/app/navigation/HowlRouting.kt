@@ -23,7 +23,7 @@ fun HowlRouting(navController: NavHostController, innerPadding: PaddingValues) {
 
     NavHost(navController = navController, startDestination = Screen.Home.route, modifier = Modifier.padding(innerPadding)) {
         composable(Screen.Home.route) {
-            HowlHomeTab(user = userDependencies.user)
+            HowlHomeTab(user = userDependencies.user, howlerApi = userDependencies.howlerApi)
         }
 
         composable(Screen.Account.route) {

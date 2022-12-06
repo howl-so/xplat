@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("com.squareup.anvil")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -30,9 +31,14 @@ android {
 
 dependencies {
     implementation(project(":common:entities"))
+    implementation(project(":common:api"))
 
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
     implementation(libs.dagger.dagger)
     kapt(libs.dagger.compiler)
 
     implementation(libs.compose.material3)
+    implementation(libs.twyper)
 }

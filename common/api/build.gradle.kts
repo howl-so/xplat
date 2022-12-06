@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization")
+
 }
 
 kotlin {
@@ -16,6 +18,18 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":common:entities"))
+                implementation(libs.ktor.client.core)
+
+
+                implementation(libs.kotlinx.serialization.core)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.ktor.client.content.negotiation)
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.okhttp)
             }
         }
     }
