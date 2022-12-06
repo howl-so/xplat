@@ -4,6 +4,7 @@ plugins {
     id("co.touchlab.faktory.kmmbridge")
     `maven-publish`
     kotlin("native.cocoapods")
+    alias(libs.plugins.native.coroutines)
 }
 
 kotlin {
@@ -12,7 +13,7 @@ kotlin {
     iosX64()
 
     cocoapods {
-        summary = "HowlStore"
+        summary = "StoreKit"
         homepage = "https://github.com/matt-ramotar/howl"
         ios.deploymentTarget = "13"
         version = "0.0.1"
