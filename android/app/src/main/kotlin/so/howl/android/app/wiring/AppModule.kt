@@ -9,7 +9,7 @@ import so.howl.android.common.scoping.SingleIn
 import so.howl.common.api.HowlApi
 import so.howl.common.api.HowlUserApi
 import so.howl.common.api.HowlerApi
-import so.howl.common.api.HttpClient
+import so.howl.common.api.HttpClientProvider
 import so.howl.common.api.RealHowlApi
 import so.howl.common.store.howl_user.HowlUserMarketInput
 import so.howl.common.store.howl_user.HowlUserMarketKey
@@ -25,14 +25,16 @@ import javax.inject.Named
 @ContributesTo(AppScope::class)
 object AppModule {
 
-    @Provides
-    fun provideHowlApi(): HowlApi = RealHowlApi(HttpClient)
+    private val httpClient = HttpClientProvider().provide()
 
     @Provides
-    fun provideHowlUserApi(): HowlUserApi = RealHowlApi(HttpClient)
+    fun provideHowlApi(): HowlApi = RealHowlApi(httpClient)
 
     @Provides
-    fun provideHowlerApi(): HowlerApi = RealHowlApi(HttpClient)
+    fun provideHowlUserApi(): HowlUserApi = RealHowlApi(httpClient)
+
+    @Provides
+    fun provideHowlerApi(): HowlerApi = RealHowlApi(httpClient)
 
     @SingleIn(AppScope::class)
     @Named(HOWL_USER_MARKET)
