@@ -20,7 +20,7 @@ data class HowlerApiResponse(
     val status: String
 )
 
-class RealHowlApi(val client: HttpClient) : HowlApi {
+class RealHowlApi(private val client: HttpClient = HttpClient) : HowlApi {
     override suspend fun getHowlUser(howlUserId: HowlUserId): HowlUser {
         // TODO(matt-ramotar)
         return FakeHowlUsers.get(howlUserId)
