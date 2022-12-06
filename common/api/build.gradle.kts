@@ -2,7 +2,10 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization")
-
+    id("co.touchlab.faktory.kmmbridge")
+    `maven-publish`
+    kotlin("native.cocoapods")
+    alias(libs.plugins.native.coroutines)
 }
 
 kotlin {
@@ -13,6 +16,17 @@ kotlin {
     }
     ios()
     jvm()
+
+    cocoapods {
+        summary = "HowlApi"
+        homepage = "https://github.com/matt-ramotar/howl"
+        ios.deploymentTarget = "13"
+        version = "0.0.1"
+
+        framework {
+            baseName = "HowlApi"
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -46,4 +60,13 @@ android {
         minSdk = 24
         targetSdk = 33
     }
+}
+
+addGithubPackagesRepository()
+kmmbridge {
+    frameworkName.set("HowlApi")
+    githubReleaseArtifacts()
+    githubReleaseVersions()
+    versionPrefix.set("0.0")
+    spm()
 }
