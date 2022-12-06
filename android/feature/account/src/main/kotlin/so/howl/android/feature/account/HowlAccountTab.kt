@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 import so.howl.common.entities.HowlUser
 
 @Composable
-fun HowlAccountTab(user: HowlUser) {
+fun HowlAccountTab(user: so.howl.common.entities.HowlUser) {
     Text(text = user.name)
 }
