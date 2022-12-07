@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
+import so.howl.android.feature.swipe.remember.rememberCardController
 
 enum class SwipedOutDirection {
     LEFT, RIGHT
