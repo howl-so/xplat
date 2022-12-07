@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import so.howl.android.feature.swipe.SwipedOutDirection
-import so.howl.android.feature.swipe.Twyper
+import so.howl.android.feature.swipe.Swiper
 import so.howl.common.storekit.entities.Howler
 
 @Composable
@@ -21,7 +21,7 @@ fun Swiper(
     onItemRemoved: (Howler, SwipedOutDirection) -> Unit = { _, _ -> },
     loadNextHowler: suspend () -> Unit
 ) {
-    Twyper(
+    Swiper(
         items = items,
         paddingBetweenCards = 0f,
         onItemRemoved = onItemRemoved,

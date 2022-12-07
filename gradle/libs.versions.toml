@@ -86,8 +86,6 @@ sqldelight-gradle-plugin = { group = "com.squareup.sqldelight", name = "gradle-p
 sqldelight-native-driver = { group = "com.squareup.sqldelight", name = "native-driver", version.ref = "sqldelight" }
 sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", version.ref = "sqldelight" }
 
-twyper = { group = "com.github.theapache64", name = "twyper", version = "0.0.4" }
-
 zipline-zipline = { group = "app.cash.zipline", name = "zipline", version.ref = "zipline" }
 zipline-loader = { group = "app.cash.zipline", name = "zipline-loader", version.ref = "zipline" }
 

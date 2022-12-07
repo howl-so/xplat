@@ -5,15 +5,15 @@ import androidx.compose.runtime.remember
 
 
 /**
- * To control the Twyper.
+ * To control the Swiper.
  * Used to swipe card programmatically
  */
 @Composable
-fun rememberTwyperController(): TwyperController {
-    return remember { TwyperControllerImpl() }
+fun rememberSwiperController(): SwiperController {
+    return remember { SwiperControllerImpl() }
 }
 
-interface TwyperController {
+interface SwiperController {
     /**
      * Points to the top card's [CardController]
      */
@@ -22,7 +22,7 @@ interface TwyperController {
     fun swipeLeft()
 }
 
-class TwyperControllerImpl : TwyperController {
+class SwiperControllerImpl : SwiperController {
     override var currentCardController: CardController? = null
 
     override fun swipeRight() {

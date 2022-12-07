@@ -17,11 +17,11 @@ enum class SwipedOutDirection {
 }
 
 @Composable
-inline fun <reified T> Twyper(
+inline fun <reified T> Swiper(
     items: List<T>,
     onItemRemoved: (T, SwipedOutDirection) -> Unit,
     onEmpty: () -> Unit = {},
-    twyperController: TwyperController = rememberTwyperController(),
+    swiperController: SwiperController = rememberSwiperController(),
     stackCount: Int = 2,
     paddingBetweenCards: Float = 40f,
     modifier: Modifier = Modifier,
@@ -33,7 +33,7 @@ inline fun <reified T> Twyper(
             key(item) {
                 val cardController = rememberCardController()
                 if (index == list.lastIndex) {
-                    twyperController.currentCardController = cardController
+                    swiperController.currentCardController = cardController
                 }
                 if (!cardController.isCardOut()) {
                     val paddingTop by animateFloatAsState(targetValue = (index * paddingBetweenCards))
