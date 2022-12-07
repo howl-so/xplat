@@ -1,6 +1,6 @@
 package so.howl.common.storekit.store.howler
 
-import so.howl.common.api.HowlerApi
+import so.howl.common.storekit.api.HowlerApi
 
 suspend fun HowlerMarketKey.Write?.post(api: HowlerApi, input: HowlerMarketInput): HowlerMarketOutput.Write = when (this) {
     is HowlerMarketKey.Write.Swipe -> {

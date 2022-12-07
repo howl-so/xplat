@@ -11,9 +11,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.github.theapache64.twyper.SwipedOutDirection
-import com.github.theapache64.twyper.Twyper
-import so.howl.common.entities.Howler
+import so.howl.android.feature.swipe.SwipedOutDirection
+import so.howl.android.feature.swipe.Twyper
+import so.howl.common.storekit.entities.Howler
 
 @Composable
 fun Swiper(

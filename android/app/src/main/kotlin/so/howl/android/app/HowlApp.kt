@@ -12,7 +12,7 @@ import so.howl.android.common.coroutines.suspendLazy
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.SingleIn
-import so.howl.common.api.HowlApi
+import so.howl.common.storekit.api.HowlApi
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class, boundType = Application::class)

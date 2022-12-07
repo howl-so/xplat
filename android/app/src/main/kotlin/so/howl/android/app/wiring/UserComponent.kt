@@ -6,7 +6,7 @@ import dagger.BindsInstance
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
 import so.howl.android.common.scoping.UserScope
-import so.howl.common.entities.HowlUser
+import so.howl.common.storekit.entities.HowlUser
 
 @SingleIn(UserScope::class)
 @ContributesSubcomponent(scope = UserScope::class, parentScope = AppScope::class)

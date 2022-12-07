@@ -9,12 +9,12 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import so.howl.common.api.HowlerApi
-import so.howl.common.entities.HowlUser
-import so.howl.common.entities.Howler
+import so.howl.common.storekit.api.HowlerApi
+import so.howl.common.storekit.entities.HowlUser
+import so.howl.common.storekit.entities.Howler
 
 @Composable
-fun HowlHomeTab(user: HowlUser, howlerApi: so.howl.common.api.HowlerApi) {
+fun HowlHomeTab(user: HowlUser, howlerApi: HowlerApi) {
 
     Column(
         modifier = Modifier.fillMaxSize(),

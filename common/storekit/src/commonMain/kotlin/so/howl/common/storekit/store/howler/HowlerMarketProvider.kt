@@ -1,7 +1,7 @@
 package so.howl.common.storekit.store.howler
 
 import org.mobilenativefoundation.store.store5.Market
-import so.howl.common.api.HowlerApi
+import so.howl.common.storekit.api.HowlerApi
 
 class HowlerMarketProvider(api: HowlerApi) {
     private val memoryLruStore = HowlerMemoryLruStore

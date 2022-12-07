@@ -1,7 +1,7 @@
 package so.howl.common.storekit.store.howl_user
 
 import org.mobilenativefoundation.store.store5.NetworkFetcher
-import so.howl.common.api.HowlUserApi
+import so.howl.common.storekit.api.HowlUserApi
 
 class HowlUserNetworkFetcherProvider(private val api: HowlUserApi) {
     fun provide(): NetworkFetcher<HowlUserMarketKey, HowlUserMarketInput, HowlUserMarketOutput> = NetworkFetcher.by(

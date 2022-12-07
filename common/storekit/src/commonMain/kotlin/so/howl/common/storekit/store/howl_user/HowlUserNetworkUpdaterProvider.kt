@@ -2,7 +2,7 @@ package so.howl.common.storekit.store.howl_user
 
 import org.mobilenativefoundation.store.store5.NetworkUpdater
 import org.mobilenativefoundation.store.store5.OnNetworkCompletion
-import so.howl.common.api.HowlUserApi
+import so.howl.common.storekit.api.HowlUserApi
 
 class HowlUserNetworkUpdaterProvider(private val api: HowlUserApi) {
     fun provide(): NetworkUpdater<HowlUserMarketKey, HowlUserMarketInput, HowlUserMarketOutput> = NetworkUpdater.by(

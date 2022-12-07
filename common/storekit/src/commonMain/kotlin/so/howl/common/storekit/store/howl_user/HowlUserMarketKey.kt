@@ -1,7 +1,7 @@
 package so.howl.common.storekit.store.howl_user
 
-import so.howl.common.entities.HowlAccount
-import so.howl.common.entities.HowlUserId
+import so.howl.common.storekit.entities.HowlAccount
+import so.howl.common.storekit.entities.HowlUserId
 
 sealed class HowlUserMarketKey {
     sealed class Read : HowlUserMarketKey() {

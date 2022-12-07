@@ -1,7 +1,7 @@
 package so.howl.common.storekit.store.howl_user
 
-import so.howl.common.api.HowlUserApi
-import so.howl.common.store.MarketData
+import so.howl.common.storekit.api.HowlUserApi
+import so.howl.common.storekit.store.MarketData
 
 
 suspend fun HowlUserMarketKey.Read?.get(api: HowlUserApi): HowlUserMarketOutput.Read = when (this) {

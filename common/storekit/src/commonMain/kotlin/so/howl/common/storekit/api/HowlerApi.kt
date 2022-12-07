@@ -1,8 +1,8 @@
 package so.howl.common.storekit.api
 
-import so.howl.common.entities.HowlUserId
-import so.howl.common.entities.Howler
-import so.howl.common.entities.HowlerId
+import so.howl.common.storekit.entities.HowlUserId
+import so.howl.common.storekit.entities.Howler
+import so.howl.common.storekit.entities.HowlerId
 
 interface HowlerApi {
     suspend fun getHowler(howlerId: HowlerId): Howler

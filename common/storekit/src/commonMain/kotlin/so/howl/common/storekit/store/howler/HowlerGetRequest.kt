@@ -1,7 +1,7 @@
 package so.howl.common.storekit.store.howler
 
-import so.howl.common.api.HowlerApi
-import so.howl.common.store.MarketData
+import so.howl.common.storekit.api.HowlerApi
+import so.howl.common.storekit.store.MarketData
 
 suspend fun HowlerMarketKey.Read?.get(api: HowlerApi): HowlerMarketOutput.Read = when (this) {
     is HowlerMarketKey.Read.GetAllByOwnerId -> {

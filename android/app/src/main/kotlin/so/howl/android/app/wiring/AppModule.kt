@@ -6,19 +6,19 @@ import dagger.Provides
 import org.mobilenativefoundation.store.store5.Market
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
-import so.howl.common.api.HowlApi
-import so.howl.common.api.HowlUserApi
-import so.howl.common.api.HowlerApi
-import so.howl.common.api.HttpClientProvider
-import so.howl.common.api.RealHowlApi
-import so.howl.common.store.howl_user.HowlUserMarketInput
-import so.howl.common.store.howl_user.HowlUserMarketKey
-import so.howl.common.store.howl_user.HowlUserMarketOutput
-import so.howl.common.store.howl_user.HowlUserMarketProvider
-import so.howl.common.store.howler.HowlerMarketInput
-import so.howl.common.store.howler.HowlerMarketKey
-import so.howl.common.store.howler.HowlerMarketOutput
-import so.howl.common.store.howler.HowlerMarketProvider
+import so.howl.common.storekit.api.HowlApi
+import so.howl.common.storekit.api.HowlUserApi
+import so.howl.common.storekit.api.HowlerApi
+import so.howl.common.storekit.api.HttpClientProvider
+import so.howl.common.storekit.api.RealHowlApi
+import so.howl.common.storekit.store.howl_user.HowlUserMarketInput
+import so.howl.common.storekit.store.howl_user.HowlUserMarketKey
+import so.howl.common.storekit.store.howl_user.HowlUserMarketOutput
+import so.howl.common.storekit.store.howl_user.HowlUserMarketProvider
+import so.howl.common.storekit.store.howler.HowlerMarketInput
+import so.howl.common.storekit.store.howler.HowlerMarketKey
+import so.howl.common.storekit.store.howler.HowlerMarketOutput
+import so.howl.common.storekit.store.howler.HowlerMarketProvider
 import javax.inject.Named
 
 @Module

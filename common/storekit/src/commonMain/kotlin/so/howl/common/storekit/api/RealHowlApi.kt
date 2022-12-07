@@ -5,13 +5,13 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.Serializable
-import so.howl.common.api.fake.FakeHowlUsers
-import so.howl.common.api.fake.FakeHowlers
-import so.howl.common.entities.HowlAccount
-import so.howl.common.entities.HowlUser
-import so.howl.common.entities.HowlUserId
-import so.howl.common.entities.Howler
-import so.howl.common.entities.HowlerId
+import so.howl.common.storekit.api.fake.FakeHowlUsers
+import so.howl.common.storekit.api.fake.FakeHowlers
+import so.howl.common.storekit.entities.HowlAccount
+import so.howl.common.storekit.entities.HowlUser
+import so.howl.common.storekit.entities.HowlUserId
+import so.howl.common.storekit.entities.Howler
+import so.howl.common.storekit.entities.HowlerId
 
 
 @Serializable

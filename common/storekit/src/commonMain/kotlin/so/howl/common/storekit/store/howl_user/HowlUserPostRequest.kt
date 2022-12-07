@@ -1,10 +1,10 @@
 package so.howl.common.storekit.store.howl_user
 
-import so.howl.common.api.HowlUserApi
-import so.howl.common.api.HowlerApi
-import so.howl.common.store.howler.HowlerMarketInput
-import so.howl.common.store.howler.HowlerMarketKey
-import so.howl.common.store.howler.HowlerMarketOutput
+import so.howl.common.storekit.api.HowlUserApi
+import so.howl.common.storekit.api.HowlerApi
+import so.howl.common.storekit.store.howler.HowlerMarketInput
+import so.howl.common.storekit.store.howler.HowlerMarketKey
+import so.howl.common.storekit.store.howler.HowlerMarketOutput
 
 
 suspend fun HowlUserMarketKey.Write?.post(api: HowlUserApi, input: HowlUserMarketInput): HowlUserMarketOutput.Write = when (this) {

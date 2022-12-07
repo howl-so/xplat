@@ -1,8 +1,8 @@
 package so.howl.common.storekit.api.fake
 
-import so.howl.common.entities.HowlUser
-import so.howl.common.entities.HowlUserId
-import so.howl.common.entities.HowlerId
+import so.howl.common.storekit.entities.HowlUser
+import so.howl.common.storekit.entities.HowlUserId
+import so.howl.common.storekit.entities.HowlerId
 
 object FakeHowlUsers {
     val Matt = object : HowlUser {

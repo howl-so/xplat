@@ -3,25 +3,33 @@ package so.howl.android.feature.swipe
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
+
+/**
+ * To control the Twyper.
+ * Used to swipe card programmatically
+ */
 @Composable
-fun rememberSwiperController(): SwiperController {
-    return remember { RealSwiperController() }
+fun rememberTwyperController(): TwyperController {
+    return remember { TwyperControllerImpl() }
 }
 
-interface SwiperController {
-    var cardController: CardController?
+interface TwyperController {
+    /**
+     * Points to the top card's [CardController]
+     */
+    var currentCardController: CardController?
     fun swipeRight()
     fun swipeLeft()
 }
 
-class RealSwiperController : SwiperController {
-    override var cardController: CardController? = null
+class TwyperControllerImpl : TwyperController {
+    override var currentCardController: CardController? = null
 
     override fun swipeRight() {
-        cardController?.swipeRight()
+        currentCardController?.swipeRight()
     }
 
     override fun swipeLeft() {
-        cardController?.swipeLeft()
+        currentCardController?.swipeLeft()
     }
 }

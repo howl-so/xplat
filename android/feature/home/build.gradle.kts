@@ -30,8 +30,9 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":android:feature:swipe"))
     implementation(project(":common:storekit"))
+
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil.compose)
@@ -39,5 +40,4 @@ dependencies {
     kapt(libs.dagger.compiler)
 
     implementation(libs.compose.material3)
-    implementation(libs.twyper)
 }

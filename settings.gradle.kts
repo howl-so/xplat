@@ -28,5 +28,6 @@ include(":android:common:hig")
 
 include(":android:feature:account")
 include(":android:feature:home")
+include(":android:feature:swipe")
 
 include(":common:storekit")

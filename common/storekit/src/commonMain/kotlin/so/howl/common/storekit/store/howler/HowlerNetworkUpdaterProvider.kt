@@ -2,7 +2,7 @@ package so.howl.common.storekit.store.howler
 
 import org.mobilenativefoundation.store.store5.NetworkUpdater
 import org.mobilenativefoundation.store.store5.OnNetworkCompletion
-import so.howl.common.api.HowlerApi
+import so.howl.common.storekit.api.HowlerApi
 
 class HowlerNetworkUpdaterProvider(private val api: HowlerApi) {
     fun provide(): NetworkUpdater<HowlerMarketKey, HowlerMarketInput, HowlerMarketOutput> = NetworkUpdater.by(
