@@ -44,9 +44,7 @@ dependencies {
 
     implementation(project(":android:feature:account"))
     implementation(project(":android:feature:home"))
-
-    implementation(project(":common:entities"))
-    implementation(project(":common:store"))
+    implementation(project(":common:storekit"))
 
     implementation(libs.activity.compose)
     implementation(libs.androidx.viewmodel)

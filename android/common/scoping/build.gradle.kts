@@ -20,9 +20,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":common:entities"))
-    implementation(project(":common:store"))
 
+    implementation(project(":common:storekit"))
     implementation(libs.dagger.dagger)
     kapt(libs.dagger.compiler)
 }
