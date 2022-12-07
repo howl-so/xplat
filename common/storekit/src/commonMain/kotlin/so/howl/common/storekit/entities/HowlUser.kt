@@ -8,4 +8,14 @@ interface HowlUser {
     val email: String
     val avatarUrl: String
     val owns: List<HowlerId>
+
+    companion object {
+        fun from(
+            id: HowlUserId,
+            name: String,
+            email: String,
+            avatarUrl: String,
+            owns: List<HowlerId>
+        ): HowlUser = RealHowlUser(id, name, email, avatarUrl, owns)
+    }
 }
