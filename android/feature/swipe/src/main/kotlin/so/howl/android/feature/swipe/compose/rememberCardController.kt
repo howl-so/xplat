@@ -1,4 +1,4 @@
-package so.howl.android.feature.swipe.remember
+package so.howl.android.feature.swipe.compose
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.runtime.Composable

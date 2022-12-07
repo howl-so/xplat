@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import so.howl.android.feature.swipe.SwipedOutDirection
-import so.howl.android.feature.swipe.Swiper
+import so.howl.android.feature.swipe.compose.Swiper
 import so.howl.common.storekit.entities.Howler
 
 @Composable

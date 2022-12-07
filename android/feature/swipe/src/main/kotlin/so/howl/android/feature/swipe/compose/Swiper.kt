@@ -1,4 +1,4 @@
-package so.howl.android.feature.swipe
+package so.howl.android.feature.swipe.compose
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -11,11 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
-import so.howl.android.feature.swipe.remember.rememberCardController
-
-enum class SwipedOutDirection {
-    LEFT, RIGHT
-}
+import so.howl.android.feature.swipe.SwipedOutDirection
+import so.howl.android.feature.swipe.SwiperController
 
 @Composable
 inline fun <reified T> Swiper(
