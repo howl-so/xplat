@@ -32,6 +32,9 @@ android {
 dependencies {
     implementation(project(":android:feature:swipe"))
     implementation(project(":common:storekit"))
+    implementation(project(":android:common:model"))
+    implementation(project(":android:common:scoping"))
+    implementation(project(":android:common:navigation"))
 
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
