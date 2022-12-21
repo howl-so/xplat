@@ -22,7 +22,6 @@ rootProject.name = "howl"
 
 include(":android:app")
 include(":android:common:scoping")
-include(":android:common:model")
 include(":android:common:coroutines")
 include(":android:common:navigation")
 include(":android:common:hig")

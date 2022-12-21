@@ -33,6 +33,7 @@ zipline = "0.9.10"
 [libraries]
 anvil-gradle-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
 androidx-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodel" }
+androidx-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "viewmodel" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version = "1.5.4" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 

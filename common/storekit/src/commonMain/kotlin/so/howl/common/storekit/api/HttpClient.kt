@@ -10,6 +10,7 @@ class HttpClientProvider {
         install(ContentNegotiation) {
             json(Json {
                 isLenient = true
+                ignoreUnknownKeys = true
             })
         }
     }

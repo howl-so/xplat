@@ -12,6 +12,11 @@ kotlin {
     android()
     iosArm64()
     iosX64()
+    jvm("desktop")
+    js {
+        browser()
+        binaries.executable()
+    }
 
     cocoapods {
         summary = "StoreKit"
@@ -29,7 +34,7 @@ kotlin {
             dependencies {
                 implementation(libs.sqldelight.runtime)
                 implementation(libs.sqldelight.coroutines.extensions)
-                api(libs.store5)
+                api(libs.store5.snapshot)
                 implementation(libs.kotlinx.serialization.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.content.negotiation)
@@ -47,6 +52,14 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation(libs.sqldelight.native.driver)
+            }
+        }
+
+
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.store5)
             }
         }
     }

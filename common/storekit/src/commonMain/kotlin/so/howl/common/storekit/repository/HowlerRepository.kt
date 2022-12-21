@@ -1,24 +1,25 @@
 package so.howl.common.storekit.repository
 
 import kotlinx.coroutines.flow.Flow
-import org.mobilenativefoundation.store.store5.MarketResponse
-import org.mobilenativefoundation.store.store5.ReadRequest
-import org.mobilenativefoundation.store.store5.WriteRequest
-import so.howl.common.storekit.store.howler.HowlerMarket
-import so.howl.common.storekit.store.howler.HowlerMarketInput
-import so.howl.common.storekit.store.howler.HowlerMarketKey
-import so.howl.common.storekit.store.howler.HowlerMarketOutput
+import org.mobilenativefoundation.store.store5.ExperimentalStoreApi
+import org.mobilenativefoundation.store.store5.MutableStore
+import org.mobilenativefoundation.store.store5.StoreReadRequest
+import org.mobilenativefoundation.store.store5.StoreReadResponse
+import org.mobilenativefoundation.store.store5.StoreWriteRequest
+import org.mobilenativefoundation.store.store5.StoreWriteResponse
+import so.howl.common.storekit.store.howler.HowlerKey
+import so.howl.common.storekit.store.howler.PopulatedHowlerCommonRep
 
-class HowlerRepository(private val market: HowlerMarket) {
-    suspend fun read(
-        reader: ReadRequest<HowlerMarketKey, HowlerMarketInput, HowlerMarketOutput>
-    ): Flow<MarketResponse<HowlerMarketOutput>> = market.read(reader)
+interface HowlerRepository {
 
-    suspend fun write(
-        writer: WriteRequest<HowlerMarketKey, HowlerMarketInput, HowlerMarketOutput>
-    ): Boolean = market.write(writer)
+    fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<PopulatedHowlerCommonRep>>
+    suspend fun write(request: StoreWriteRequest<HowlerKey, PopulatedHowlerCommonRep, Boolean>): StoreWriteResponse
+}
 
-    suspend fun delete(key: HowlerMarketKey): Boolean = market.delete(key)
+@OptIn(ExperimentalStoreApi::class)
+class RealHowlerRepository(private val store: MutableStore<HowlerKey, PopulatedHowlerCommonRep>) : HowlerRepository {
+    override fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<PopulatedHowlerCommonRep>> =
+        store.stream<Boolean>(request)
 
-    suspend fun delete(): Boolean = market.delete()
+    override suspend fun write(request: StoreWriteRequest<HowlerKey, PopulatedHowlerCommonRep, Boolean>): StoreWriteResponse = store.write(request)
 }

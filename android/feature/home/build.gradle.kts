@@ -32,7 +32,6 @@ android {
 dependencies {
     implementation(project(":android:feature:swipe"))
     implementation(project(":common:storekit"))
-    implementation(project(":android:common:model"))
     implementation(project(":android:common:scoping"))
     implementation(project(":android:common:navigation"))
 
@@ -41,6 +40,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.dagger.dagger)
     kapt(libs.dagger.compiler)
+    implementation(libs.androidx.viewmodel.compose)
 
     implementation(libs.compose.material3)
 }

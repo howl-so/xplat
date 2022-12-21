@@ -48,6 +48,7 @@ dependencies {
 
     implementation(libs.activity.compose)
     implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.viewmodel.compose)
     implementation(libs.androidx.fragment)
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)

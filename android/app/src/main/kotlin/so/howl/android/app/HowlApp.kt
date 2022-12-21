@@ -25,6 +25,7 @@ class HowlApp : Application(), ComponentHolder {
 
     val userComponent = coroutineScope.suspendLazy {
         val user = api.getHowlUser(HOWL_USER_ID)
+        println("USER = $user")
         userComponentFactory.create(user)
     }
 
@@ -34,7 +35,7 @@ class HowlApp : Application(), ComponentHolder {
     }
 
     companion object {
-        private const val HOWL_USER_ID = "1"
+        private const val HOWL_USER_ID = "14b357602998f909e8b17ac9"
     }
 
     private fun AppComponent.userComponentFactory() = (this as UserComponent.ParentBindings).userComponentFactory()

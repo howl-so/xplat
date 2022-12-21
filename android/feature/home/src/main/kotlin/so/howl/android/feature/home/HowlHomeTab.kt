@@ -3,38 +3,42 @@ package so.howl.android.feature.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import so.howl.common.storekit.api.HowlerApi
-import so.howl.common.storekit.entities.HowlUser
-import so.howl.common.storekit.entities.Howler
+import androidx.lifecycle.viewmodel.compose.viewModel
+import so.howl.android.feature.home.model.state.HomeTabViewState
+import so.howl.android.feature.home.model.viewmodel.HomeTabViewModel
 
 @Composable
-fun HowlHomeTab(user: HowlUser, howlerApi: HowlerApi) {
+fun HowlHomeTab(homeTabViewModel: HomeTabViewModel = viewModel()) {
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        val items = remember { mutableStateListOf<Howler>() }
-
-        suspend fun loadNextHowler() {
-            val response = howlerApi.getHowler(user.id)
-            items.add(response)
+    when (val viewState = homeTabViewModel.state.collectAsState().value.viewState) {
+        is HomeTabViewState.Failure -> {
+            Column {
+                Text(text = "Failure")
+                Text(text = viewState.error.message ?: "")
+            }
         }
 
-        LaunchedEffect(Unit) {
-            loadNextHowler()
+        HomeTabViewState.Initial -> {
+            Text(text = "Initial")
         }
 
-        Swiper(items = items) {
-            loadNextHowler()
+        HomeTabViewState.Loading -> {
+            Text(text = "Loading")
+        }
+
+        is HomeTabViewState.Success -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+            }
         }
     }
 }
