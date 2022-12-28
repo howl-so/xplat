@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import so.howl.android.feature.swipe.SwipedOutDirection
 import so.howl.android.feature.swipe.compose.Swiper
-import so.howl.common.storekit.entities.howler.common.CommonHowler
+import so.howl.common.storekit.entities.howler.output.Howler
 
 @Composable
 fun Swiper(
-    items: List<CommonHowler>,
-    onItemRemoved: (CommonHowler, SwipedOutDirection) -> Unit = { _, _ -> },
+    items: List<Howler>,
+    onItemRemoved: (Howler, SwipedOutDirection) -> Unit = { _, _ -> },
     loadNextHowler: suspend () -> Unit
 ) {
     Swiper(

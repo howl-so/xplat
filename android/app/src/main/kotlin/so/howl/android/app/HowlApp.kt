@@ -13,6 +13,7 @@ import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.SingleIn
 import so.howl.common.storekit.api.HowlApi
+import so.howl.common.storekit.api.fake.FakeHowlUsers
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class, boundType = Application::class)
@@ -24,7 +25,7 @@ class HowlApp : Application(), ComponentHolder {
     private val api: HowlApi by lazy { component.appDependencies().api }
 
     val userComponent = coroutineScope.suspendLazy {
-        val user = api.getHowlUser(HOWL_USER_ID)
+        val user = FakeHowlUsers.Matt
         println("USER = $user")
         userComponentFactory.create(user)
     }

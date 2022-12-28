@@ -3,13 +3,16 @@ package so.howl.common.storekit.store.howler
 import org.mobilenativefoundation.store.store5.MutableStore
 import org.mobilenativefoundation.store.store5.StoreBuilder
 import so.howl.common.storekit.api.HowlerApi
+import so.howl.common.storekit.entities.howler.network.NetworkHowler
+import so.howl.common.storekit.entities.howler.output.Howler
+import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howler.bookkeeper.HowlerBookkeeperProvider
 import so.howl.common.storekit.store.howler.fetcher.HowlerFetcherProvider
 import so.howl.common.storekit.store.howler.updater.HowlerUpdaterProvider
 
 class HowlerStoreProvider(private val api: HowlerApi) {
-    fun provide(): MutableStore<HowlerKey, PopulatedHowlerCommonRep> = StoreBuilder
-        .from<HowlerKey, PopulatedHowlerNetworkRep, PopulatedHowlerCommonRep>(
+    fun provide(): MutableStore<HowlerKey, StoreOutput<Howler>> = StoreBuilder
+        .from<HowlerKey, StoreOutput<NetworkHowler>, StoreOutput<Howler>>(
             fetcher = HowlerFetcherProvider(api).provide()
         ).build(
             updater = HowlerUpdaterProvider(api).provide(),

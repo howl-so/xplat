@@ -55,13 +55,7 @@ kotlin {
             }
         }
 
-
-
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.store5)
-            }
-        }
+        val desktopMain by getting
     }
 }
 

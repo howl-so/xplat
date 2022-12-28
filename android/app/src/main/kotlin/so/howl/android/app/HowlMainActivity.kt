@@ -21,8 +21,9 @@ import so.howl.android.app.wiring.UserComponent
 import so.howl.android.common.hig.HigTheme
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.UserDependencies
-import so.howl.common.storekit.entities.howler.common.CommonHowler
-import so.howl.common.storekit.entities.howler.common.Howlers
+import so.howl.common.storekit.api.fake.FakeHowlers
+import so.howl.common.storekit.entities.howler.output.Howler
+import so.howl.common.storekit.entities.howler.output.Howlers
 
 class HowlMainActivity : ComponentActivity(), ComponentHolder {
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -45,7 +46,7 @@ class HowlMainActivity : ComponentActivity(), ComponentHolder {
             val howlerComponentFactory = (userComponent as HowlerComponent.ParentBindings).howlerComponentFactory()
 
             val userDependencies = userComponent as UserDependencies
-            val howlers: List<CommonHowler> = userDependencies.howlerApi.getHowlersByOwnerId(userDependencies.user.id)
+            val howlers: List<Howler> = listOf(FakeHowlers.Tag.output)
             println("HITTING AFTER HOWLERS")
             val howlerComponent: HowlerComponent = howlerComponentFactory.create(Howlers.from(howlers))
             component = Pair(userComponent, howlerComponent)

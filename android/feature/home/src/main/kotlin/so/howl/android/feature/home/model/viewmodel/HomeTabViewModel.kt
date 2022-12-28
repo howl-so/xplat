@@ -11,12 +11,12 @@ import kotlinx.coroutines.launch
 import so.howl.android.feature.home.model.event.HomeTabEvent
 import so.howl.android.feature.home.model.state.HomeTabState
 import so.howl.android.feature.home.model.state.HomeTabViewState
-import so.howl.common.storekit.entities.howler.common.Howlers
-import so.howl.common.storekit.entities.user.common.CommonHowlUser
+import so.howl.common.storekit.entities.howler.output.Howlers
+import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.repository.HowlerRepository
 
 class HomeTabViewModel(
-    private val user: CommonHowlUser,
+    private val user: HowlUser,
     private val howlers: Howlers,
     private val howlerRepository: HowlerRepository,
     private val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.Default)

@@ -7,19 +7,18 @@ import org.mobilenativefoundation.store.store5.StoreReadRequest
 import org.mobilenativefoundation.store.store5.StoreReadResponse
 import org.mobilenativefoundation.store.store5.StoreWriteRequest
 import org.mobilenativefoundation.store.store5.StoreWriteResponse
+import so.howl.common.storekit.entities.howler.network.NetworkHowler
+import so.howl.common.storekit.entities.howler.output.Howler
+import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howler.HowlerKey
-import so.howl.common.storekit.store.howler.PopulatedHowlerCommonRep
 
 interface HowlerRepository {
-
-    fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<PopulatedHowlerCommonRep>>
-    suspend fun write(request: StoreWriteRequest<HowlerKey, PopulatedHowlerCommonRep, Boolean>): StoreWriteResponse
+    fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<StoreOutput<Howler>>>
+    suspend fun write(request: StoreWriteRequest<HowlerKey, StoreOutput<Howler>, NetworkHowler>): StoreWriteResponse
 }
 
 @OptIn(ExperimentalStoreApi::class)
-class RealHowlerRepository(private val store: MutableStore<HowlerKey, PopulatedHowlerCommonRep>) : HowlerRepository {
-    override fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<PopulatedHowlerCommonRep>> =
-        store.stream<Boolean>(request)
-
-    override suspend fun write(request: StoreWriteRequest<HowlerKey, PopulatedHowlerCommonRep, Boolean>): StoreWriteResponse = store.write(request)
+class RealHowlerRepository(private val store: MutableStore<HowlerKey, StoreOutput<Howler>>) : HowlerRepository {
+    override fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<StoreOutput<Howler>>> = store.stream<NetworkHowler>(request)
+    override suspend fun write(request: StoreWriteRequest<HowlerKey, StoreOutput<Howler>, NetworkHowler>): StoreWriteResponse = store.write(request)
 }
