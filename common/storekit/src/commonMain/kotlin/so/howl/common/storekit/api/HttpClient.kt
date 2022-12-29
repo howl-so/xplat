@@ -11,6 +11,7 @@ class HttpClientProvider {
             json(Json {
                 isLenient = true
                 ignoreUnknownKeys = true
+                encodeDefaults = true
             })
         }
     }

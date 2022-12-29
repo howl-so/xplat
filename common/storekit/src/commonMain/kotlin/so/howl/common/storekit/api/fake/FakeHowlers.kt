@@ -4,6 +4,7 @@ import so.howl.common.storekit.entities.howler.HowlerId
 import so.howl.common.storekit.entities.howler.network.NetworkHowler
 import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.user.HowlUserId
+import so.howl.common.storekit.entities.user.network.NetworkHowlUser
 import so.howl.common.storekit.entities.user.output.HowlUser
 
 object FakeHowlers {
@@ -17,7 +18,7 @@ object FakeHowlers {
             override val id: HowlerId = ID
             override val name: String = NAME
             override val avatarUrl: String = AVATAR_URL
-            override val owners: List<HowlUser> = OWNERS
+            override val owners: List<NetworkHowlUser> = listOf()
         }
 
         val output = object : Howler {
@@ -39,7 +40,7 @@ object FakeHowlers {
             override val id: HowlerId = ID
             override val name: String = NAME
             override val avatarUrl: String = AVATAR_URL
-            override val owners: List<HowlUser> = OWNERS
+            override val owners: List<NetworkHowlUser> = listOf()
         }
 
         val output = object : Howler {
@@ -60,7 +61,7 @@ object FakeHowlers {
             override val id: HowlerId = ID
             override val name: String = NAME
             override val avatarUrl: String = AVATAR_URL
-            override val owners: List<HowlUser> = OWNERS
+            override val owners: List<NetworkHowlUser> = listOf()
         }
 
         val output = object : Howler {

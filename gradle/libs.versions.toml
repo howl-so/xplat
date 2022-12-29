@@ -86,6 +86,8 @@ sqldelight-coroutines-extensions = { group = "com.squareup.sqldelight", name = "
 sqldelight-gradle-plugin = { group = "com.squareup.sqldelight", name = "gradle-plugin", version.ref = "sqldelight" }
 sqldelight-native-driver = { group = "com.squareup.sqldelight", name = "native-driver", version.ref = "sqldelight" }
 sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", version.ref = "sqldelight" }
+sqldelight-sqlite-driver = { group = "com.squareup.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
+sqldelight-sqljs-driver = { group = "com.squareup.sqldelight", name = "sqljs-driver", version.ref = "sqldelight" }
 
 zipline-zipline = { group = "app.cash.zipline", name = "zipline", version.ref = "zipline" }
 zipline-loader = { group = "app.cash.zipline", name = "zipline-loader", version.ref = "zipline" }

@@ -12,7 +12,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import so.howl.android.app.ui.HowlScaffold
@@ -21,9 +20,11 @@ import so.howl.android.app.wiring.UserComponent
 import so.howl.android.common.hig.HigTheme
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.UserDependencies
-import so.howl.common.storekit.api.fake.FakeHowlers
 import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.howler.output.Howlers
+import so.howl.common.storekit.entities.howler.output.RealHowler
+import so.howl.common.storekit.entities.user.output.RealHowlUser
+import so.howl.common.storekit.result.RequestResult
 
 class HowlMainActivity : ComponentActivity(), ComponentHolder {
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -31,12 +32,6 @@ class HowlMainActivity : ComponentActivity(), ComponentHolder {
     override lateinit var component: Pair<UserComponent, HowlerComponent?>
 
     private val initialized = MutableStateFlow(false)
-
-
-    private suspend fun transition() {
-        delay(200)
-        initialized.value = true
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +41,26 @@ class HowlMainActivity : ComponentActivity(), ComponentHolder {
             val howlerComponentFactory = (userComponent as HowlerComponent.ParentBindings).howlerComponentFactory()
 
             val userDependencies = userComponent as UserDependencies
-            val howlers: List<Howler> = listOf(FakeHowlers.Tag.output)
-            println("HITTING AFTER HOWLERS")
-            val howlerComponent: HowlerComponent = howlerComponentFactory.create(Howlers.from(howlers))
-            component = Pair(userComponent, howlerComponent)
-            transition()
+
+            val response = userDependencies.howlerApi.getHowlersByOwnerId(userComponent.user.id)
+            if (response is RequestResult.Success) {
+                val howlers: List<Howler> = response.data.map {
+                    RealHowler(
+                        it.id,
+                        it.name,
+                        it.avatarUrl,
+                        it.owners.map { RealHowlUser(it.id, it.name, it.email, it.username, it.avatarUrl, it.howlerIds) })
+                }
+                val howlerComponent: HowlerComponent = howlerComponentFactory.create(Howlers.from(howlers))
+                component = Pair(userComponent, howlerComponent)
+                println("SUCCESS == $response")
+                initialized.value = true
+            } else {
+                println("RESPONSE === $response")
+                component = Pair(userComponent, null)
+                initialized.value = true
+            }
+
         }
 
         setContent {

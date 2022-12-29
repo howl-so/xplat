@@ -6,6 +6,6 @@ import so.howl.common.storekit.entities.user.output.HowlUser
 interface Howler {
     val id: HowlerId
     val name: String
-    val avatarUrl: String
+    val avatarUrl: String?
     val owners: List<HowlUser>
 }

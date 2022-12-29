@@ -10,6 +10,6 @@ data class RealHowler(
     @SerialName("_id")
     override val id: HowlerId,
     override val name: String,
-    override val avatarUrl: String,
+    override val avatarUrl: String? = null,
     override val owners: List<HowlUser>
 ) : Howler

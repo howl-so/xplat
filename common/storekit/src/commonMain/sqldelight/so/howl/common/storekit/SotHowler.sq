@@ -1,0 +1,22 @@
+CREATE TABLE sotHowler(
+  id TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  avatarUrl TEXT
+);
+
+getById:
+SELECT *
+FROM sotHowler
+WHERE id = ?;
+
+upsert:
+INSERT INTO sotHowler
+VALUES ?;
+
+clearById:
+DELETE
+FROM sotHowler
+WHERE id = ?;
+
+clearAll:
+DELETE FROM sotHowler;

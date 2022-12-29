@@ -6,6 +6,7 @@ plugins {
     `maven-publish`
     kotlin("native.cocoapods")
     alias(libs.plugins.native.coroutines)
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -47,15 +48,30 @@ kotlin {
                 implementation(libs.sqldelight.android.driver)
             }
         }
+        
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.sqldelight.sqlite.driver)
+            }
+        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
 
-        val nativeMain by creating {
+        val iosMain by creating {
             dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+
             dependencies {
                 implementation(libs.sqldelight.native.driver)
             }
         }
 
-        val desktopMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.sqldelight.sqljs.driver)
+            }
+        }
     }
 }
 
@@ -76,4 +92,10 @@ kmmbridge {
     githubReleaseVersions()
     versionPrefix.set("0.0")
     spm()
+}
+
+sqldelight {
+    database("HowlDatabase") {
+        packageName = "so.howl.common.storekit"
+    }
 }

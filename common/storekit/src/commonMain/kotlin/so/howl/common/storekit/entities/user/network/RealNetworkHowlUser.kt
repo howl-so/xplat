@@ -8,10 +8,10 @@ import so.howl.common.storekit.entities.user.HowlUserId
 @Serializable
 data class RealNetworkHowlUser(
     @SerialName("_id")
-    override val id: HowlUserId,
+    override val id: String,
     override val name: String,
     override val email: String,
     override val username: String,
     override val avatarUrl: String? = null,
-    override val howlerIds: List<HowlerId>? = null
+    override val howlerIds: List<String>? = null
 ) : NetworkHowlUser

@@ -1,0 +1,24 @@
+CREATE TABLE sotHowlUser(
+  id TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  username TEXT NOT NULL,
+  avatarUrl TEXT
+);
+
+getById:
+SELECT *
+FROM sotHowlUser
+WHERE id = ?;
+
+upsert:
+INSERT INTO sotHowlUser
+VALUES ?;
+
+clearById:
+DELETE
+FROM sotHowlUser
+WHERE id = ?;
+
+clearAll:
+DELETE FROM sotHowlUser;
