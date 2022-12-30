@@ -1,0 +1,20 @@
+CREATE TABLE sotPage(
+  id TEXT UNIQUE NOT NULL,
+  start INTEGER NOT NULL,
+  size INTEGER
+);
+
+getById:
+SELECT *
+FROM sotPage
+WHERE id = ?;
+
+getByStartAndSize:
+SELECT *
+FROM sotPage
+WHERE start = ?
+AND size = ?;
+
+upsert:
+INSERT OR REPLACE INTO sotPage
+VALUES (?, ?, ?);

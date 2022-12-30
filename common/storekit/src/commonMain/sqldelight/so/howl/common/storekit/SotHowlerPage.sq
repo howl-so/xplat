@@ -1,0 +1,14 @@
+CREATE TABLE sotHowlerPage(
+  id TEXT NOT NULL,
+  howlerId TEXT NOT NULL,
+  pageId TEXT NOT NULL
+);
+
+getByPageId:
+SELECT *
+FROM sotHowlerPage
+WHERE pageId = ?;
+
+upsert:
+INSERT OR REPLACE INTO sotHowlerPage
+VALUES (?, ?, ?);

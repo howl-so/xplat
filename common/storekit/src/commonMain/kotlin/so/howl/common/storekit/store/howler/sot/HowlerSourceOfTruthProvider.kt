@@ -48,7 +48,8 @@ class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
                     is HowlerKey.Read.ByOwnerId -> {
                         database.sotHowlUserHowlerQueries.getAllByHowlUserId(howlerKey.ownerId).asFlow().collect { sotHowlUserHowlerQuery ->
                             val sotHowlUserHowlers = sotHowlUserHowlerQuery.executeAsList()
-                            val sotHowlers = sotHowlUserHowlers.map { sotHowlUserHowler -> database.sotHowlerQueries.getById(sotHowlUserHowler.howlerId).executeAsOne() }
+                            val sotHowlers =
+                                sotHowlUserHowlers.map { sotHowlUserHowler -> database.sotHowlerQueries.getById(sotHowlUserHowler.howlerId).executeAsOne() }
 
                             val localHowlers = sotHowlers.map { sotHowler ->
                                 LocalHowler.Single(
@@ -77,16 +78,55 @@ class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
                         }
                     }
 
-                    is HowlerKey.Read.Paginated -> TODO()
+                    is HowlerKey.Read.Paginated -> {
+                        val pageId = computePageId(howlerKey.start, howlerKey.size)
+                        val sotHowlerPages = database.sotHowlerPageQueries.getByPageId(pageId).executeAsList()
+                        val localHowlers = sotHowlerPages.map { sotHowlerPage ->
+                            val sotHowler = database.sotHowlerQueries.getById(sotHowlerPage.howlerId).executeAsOneOrNull()
+
+                            if (sotHowler != null) {
+                                LocalHowler.Single(
+                                    id = sotHowler.id,
+                                    name = sotHowler.name,
+                                    avatarUrl = sotHowler.avatarUrl,
+                                    owners = database.sotHowlUserHowlerQueries.getAllByHowlerId(sotHowler.id).executeAsList()
+                                        .map { sotHowlUserHowler -> database.sotHowlUserQueries.getById(sotHowlUserHowler.howlUserId).executeAsOne() }
+                                        .map { sotHowlUser ->
+                                            LocalHowlUser(
+                                                id = sotHowlUser.id,
+                                                name = sotHowlUser.name,
+                                                email = sotHowlUser.email,
+                                                username = sotHowlUser.username,
+                                                avatarUrl = sotHowlUser.avatarUrl,
+                                                howlerIds = database.sotHowlUserHowlerQueries
+                                                    .getAllByHowlUserId(sotHowlUser.id)
+                                                    .executeAsList()
+                                                    .map { it.howlerId }
+                                            )
+                                        }
+                                )
+                            } else {
+                                null
+                            }
+                        }
+                        emit(LocalHowler.Collection(localHowlers.filterNotNull()))
+                    }
                 }
             }
         },
-        writer = { _: HowlerKey, localHowler: LocalHowler ->
+        writer = { howlerKey: HowlerKey, localHowler: LocalHowler ->
             when (localHowler) {
                 is LocalHowler.Collection -> {
                     localHowler.howlers.forEach { singleLocalHowler ->
                         val sotHowler = SotHowler(id = singleLocalHowler.id, name = singleLocalHowler.name, avatarUrl = singleLocalHowler.avatarUrl)
                         database.sotHowlerQueries.upsert(sotHowler)
+
+                        if (howlerKey is HowlerKey.Read.Paginated) {
+                            val pageId = computePageId(howlerKey.start, howlerKey.size)
+                            val sotHowlerPageId = "$pageId-${howlerKey.howlerId}"
+                            database.sotHowlerPageQueries.upsert(sotHowlerPageId, singleLocalHowler.id, pageId)
+                        }
+
                         singleLocalHowler.owners.forEach { localHowlUser ->
                             val sotHowlUser = SotHowlUser(
                                 id = localHowlUser.id,
@@ -96,7 +136,8 @@ class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
                                 avatarUrl = localHowlUser.avatarUrl
                             )
                             database.sotHowlUserQueries.upsert(sotHowlUser)
-                            val sotHowlUserHowler = database.sotHowlUserHowlerQueries.selectAll(howlUserId = localHowlUser.id, howlerId = singleLocalHowler.id).executeAsOneOrNull()
+                            val sotHowlUserHowler =
+                                database.sotHowlUserHowlerQueries.selectAll(howlUserId = localHowlUser.id, howlerId = singleLocalHowler.id).executeAsOneOrNull()
                             if (sotHowlUserHowler == null) {
                                 database.sotHowlUserHowlerQueries.create(id = null, howlUserId = localHowlUser.id, howlerId = singleLocalHowler.id)
                             }
@@ -117,3 +158,6 @@ class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
         }
     )
 }
+
+
+private fun computePageId(start: Int, size: Int) = "$start-${start + size - 1}"
