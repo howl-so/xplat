@@ -46,13 +46,20 @@ class HomeTabViewModel(
         setState(HomeTabState(HomeTabViewState.Loading))
 
 
+        val currentHowler = howlers.howlers.first()
+        val key = HowlerKey.Read.Paginated(
+            howlerId = currentHowler.id,
+            start = 0,
+            size = 10
+        )
         println("HOWL USER ID ==== ${user.id}")
-        howlerRepository.stream(StoreReadRequest.fresh(HowlerKey.Read.ByOwnerId(user.id))).collect {
+        howlerRepository.stream(StoreReadRequest.fresh(key)).collect {
 
             val data = it.dataOrNull()
             when (data) {
                 null -> {
                     // TODO()
+                    println("NULL")
                 }
 
                 is StoreOutput.Data.Collection -> {
@@ -67,14 +74,17 @@ class HomeTabViewModel(
 
                 is StoreOutput.Data.Single -> {
                     // TODO()
+                    println("SINGLE")
                 }
 
                 is StoreOutput.Error.Exception -> {
                     // TODO()
+                    println("Exception")
                 }
 
                 is StoreOutput.Error.Message -> {
                     // TODO()
+                    println("Message")
                 }
             }
 

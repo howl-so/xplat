@@ -52,8 +52,9 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
     }
 
     override suspend fun getHowlers(howlerId: HowlerId, start: Int, size: Int): RequestResult<List<NetworkHowler>> = try {
-        val response = client.get("$ROOT_API_URL/howlers?start=${start}&size=${size}")
-        RequestResult.Success(response.body())
+        val response = client.get("$ROOT_API_URL/howlers?howlerId=${howlerId}&start=${start}&size=${size}")
+        val networkHowlers = response.body<List<RealNetworkHowler>>()
+        RequestResult.Success(networkHowlers)
     } catch (error: Throwable) {
         RequestResult.Exception(error)
     }
