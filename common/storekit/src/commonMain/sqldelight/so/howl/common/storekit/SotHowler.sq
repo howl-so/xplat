@@ -10,7 +10,7 @@ FROM sotHowler
 WHERE id = ?;
 
 upsert:
-INSERT INTO sotHowler
+INSERT OR REPLACE INTO sotHowler
 VALUES ?;
 
 clearById:

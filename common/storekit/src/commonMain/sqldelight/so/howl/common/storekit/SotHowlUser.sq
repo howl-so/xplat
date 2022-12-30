@@ -12,7 +12,7 @@ FROM sotHowlUser
 WHERE id = ?;
 
 upsert:
-INSERT INTO sotHowlUser
+INSERT OR REPLACE INTO sotHowlUser
 VALUES ?;
 
 clearById:

@@ -11,13 +11,14 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.serializer
 import so.howl.common.storekit.entities.howler.HowlerId
 import so.howl.common.storekit.entities.howler.network.NetworkHowler
 import so.howl.common.storekit.entities.howler.network.NetworkResponse
+import so.howl.common.storekit.entities.howler.network.RealNetworkHowler
 import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.user.HowlUserId
+import so.howl.common.storekit.entities.user.network.NetworkHowlUser
+import so.howl.common.storekit.entities.user.network.RealNetworkHowlUser
 import so.howl.common.storekit.result.RequestResult
 
 
@@ -41,13 +42,10 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
     }
 
     override suspend fun getHowlersByOwnerId(ownerId: HowlUserId): RequestResult<List<NetworkHowler>> = try {
-        val response = client.get("$ROOT_API_URL/howlers")
-        println("RESPONSE API == $response")
-        println(response.bodyAsText())
-        println(response.body<NetworkResponse>())
-        val networkResponse = response.body<NetworkResponse>()
-        println("NETWORK RESPONSE ==== $networkResponse")
-        RequestResult.Success(networkResponse.value)
+        val response = client.get("$ROOT_API_URL/users/${ownerId}/howlers")
+        val networkHowlers = response.body<List<RealNetworkHowler>>()
+        println("NETWORK HOWLERS = $networkHowlers")
+        RequestResult.Success(networkHowlers)
     } catch (error: Throwable) {
         println("ERROR API === $error")
         RequestResult.Exception(error)
@@ -72,6 +70,16 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
             setBody(howler)
         }
         RequestResult.Success(response.body())
+    } catch (error: Throwable) {
+        RequestResult.Exception(error)
+    }
+
+    override suspend fun getHowlUser(userId: HowlUserId): RequestResult<NetworkHowlUser> = try {
+        val response = client.get("$ROOT_API_URL/users/$userId")
+        println("RESPONSE API ==== $response")
+
+        val networkHowler = response.body<RealNetworkHowlUser>()
+        RequestResult.Success(networkHowler)
     } catch (error: Throwable) {
         RequestResult.Exception(error)
     }

@@ -4,6 +4,8 @@ import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.flow.flow
 import org.mobilenativefoundation.store.store5.SourceOfTruth
 import so.howl.common.storekit.HowlDatabase
+import so.howl.common.storekit.SotHowlUser
+import so.howl.common.storekit.SotHowler
 import so.howl.common.storekit.store.howler.HowlerKey
 
 class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
@@ -81,7 +83,27 @@ class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {
         },
         writer = { _: HowlerKey, localHowler: LocalHowler ->
             when (localHowler) {
-                is LocalHowler.Collection -> TODO()
+                is LocalHowler.Collection -> {
+                    localHowler.howlers.forEach { singleLocalHowler ->
+                        val sotHowler = SotHowler(id = singleLocalHowler.id, name = singleLocalHowler.name, avatarUrl = singleLocalHowler.avatarUrl)
+                        database.sotHowlerQueries.upsert(sotHowler)
+                        singleLocalHowler.owners.forEach { localHowlUser ->
+                            val sotHowlUser = SotHowlUser(
+                                id = localHowlUser.id,
+                                name = localHowlUser.name,
+                                email = localHowlUser.email,
+                                username = localHowlUser.username,
+                                avatarUrl = localHowlUser.avatarUrl
+                            )
+                            database.sotHowlUserQueries.upsert(sotHowlUser)
+                            val sotHowlUserHowler = database.sotHowlUserHowlerQueries.selectAll(howlUserId = localHowlUser.id, howlerId = singleLocalHowler.id).executeAsOneOrNull()
+                            if (sotHowlUserHowler == null) {
+                                database.sotHowlUserHowlerQueries.create(id = null, howlUserId = localHowlUser.id, howlerId = singleLocalHowler.id)
+                            }
+                        }
+                    }
+                }
+
                 is LocalHowler.Single -> TODO()
             }
         },

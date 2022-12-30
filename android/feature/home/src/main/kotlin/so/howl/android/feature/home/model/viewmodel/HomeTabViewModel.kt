@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.mobilenativefoundation.store.store5.StoreReadRequest
@@ -45,23 +44,35 @@ class HomeTabViewModel(
 
     suspend fun fetch(refresh: Boolean = false) {
         setState(HomeTabState(HomeTabViewState.Loading))
-        howlerRepository.stream(StoreReadRequest.fresh(HowlerKey.Read.ByOwnerId("a"))).collect {
+
+
+        println("HOWL USER ID ==== ${user.id}")
+        howlerRepository.stream(StoreReadRequest.fresh(HowlerKey.Read.ByOwnerId(user.id))).collect {
 
             val data = it.dataOrNull()
             when (data) {
                 null -> {
                     // TODO()
                 }
+
                 is StoreOutput.Data.Collection -> {
-                    val first = data.items.first()
-                    setState(HomeTabState(HomeTabViewState.Success(data.items.first())))
+                    println("DATA === $data")
+                    val first = data.items.firstOrNull()
+                    if (first != null) {
+                        setState(HomeTabState(HomeTabViewState.Success(first)))
+                    } else {
+                        setState(HomeTabState(HomeTabViewState.Failure(Exception())))
+                    }
                 }
+
                 is StoreOutput.Data.Single -> {
                     // TODO()
                 }
+
                 is StoreOutput.Error.Exception -> {
                     // TODO()
                 }
+
                 is StoreOutput.Error.Message -> {
                     // TODO()
                 }

@@ -14,7 +14,8 @@ import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.SingleIn
 import so.howl.common.storekit.api.HowlApi
-import so.howl.common.storekit.api.fake.FakeHowlUsers
+import so.howl.common.storekit.result.RequestResult
+import so.howl.common.storekit.store.howler.converter.toOutput
 import so.howl.common.storekit.store.howler.sot.DriverFactory
 import so.howl.common.storekit.store.howler.sot.HowlDatabaseProvider
 
@@ -28,9 +29,11 @@ class HowlApp : Application(), ComponentHolder {
     private val api: HowlApi by lazy { component.appDependencies().api }
 
     val userComponent = coroutineScope.suspendLazy {
-        val user = FakeHowlUsers.Matt
-        println("USER = $user")
-        userComponentFactory.create(user)
+        val result = api.getHowlUser(HOWL_USER_ID)
+        println("RESULT === $result")
+        require(result is RequestResult.Success)
+        val howlUser = result.data.toOutput()
+        userComponentFactory.create(howlUser)
     }
 
     override fun onCreate() {

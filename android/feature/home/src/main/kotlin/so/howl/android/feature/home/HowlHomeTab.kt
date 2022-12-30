@@ -37,7 +37,7 @@ fun HowlHomeTab(homeTabViewModel: HomeTabViewModel = viewModel()) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
+                Text(viewState.data.id)
             }
         }
     }

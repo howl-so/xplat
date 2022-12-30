@@ -6,7 +6,7 @@ import so.howl.common.storekit.entities.user.output.HowlUser
 
 object FakeHowlUsers {
     val Matt = object : HowlUser {
-        override val id: HowlUserId = "1"
+        override val id: HowlUserId = "14b357602998f909e8b17ac9"
         override val name: String = "Matt"
         override val email: String = "matt@howl.so"
         override val username: String = "matt"

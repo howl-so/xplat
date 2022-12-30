@@ -4,6 +4,12 @@ CREATE TABLE sotHowlUserHowler(
   howlerId TEXT NOT NULL
 );
 
+selectAll:
+SELECT *
+FROM sotHowlUserHowler
+WHERE howlUserId = ?
+AND howlerId = ?;
+
 getAllByHowlerId:
 SELECT *
 FROM sotHowlUserHowler
@@ -13,3 +19,7 @@ getAllByHowlUserId:
 SELECT *
 FROM sotHowlUserHowler
 WHERE howlUserId = ?;
+
+create:
+INSERT OR REPLACE INTO sotHowlUserHowler
+VALUES (?, ?, ?);
