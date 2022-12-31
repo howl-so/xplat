@@ -93,4 +93,8 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
     } catch (error: Throwable) {
         RequestResult.Exception(error)
     }
+
+    override suspend fun createHowlUser(name: String, email: String): RequestResult<NetworkHowlUser> {
+        TODO("Not yet implemented")
+    }
 }
