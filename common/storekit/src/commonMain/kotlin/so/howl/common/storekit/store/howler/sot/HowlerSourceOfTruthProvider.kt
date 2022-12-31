@@ -6,6 +6,8 @@ import org.mobilenativefoundation.store.store5.SourceOfTruth
 import so.howl.common.storekit.HowlDatabase
 import so.howl.common.storekit.SotHowlUser
 import so.howl.common.storekit.SotHowler
+import so.howl.common.storekit.entities.howler.local.LocalHowler
+import so.howl.common.storekit.entities.user.local.LocalHowlUser
 import so.howl.common.storekit.store.howler.HowlerKey
 
 class HowlerSourceOfTruthProvider(private val database: HowlDatabase) {

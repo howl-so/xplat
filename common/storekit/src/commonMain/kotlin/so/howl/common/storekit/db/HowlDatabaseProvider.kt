@@ -1,4 +1,4 @@
-package so.howl.common.storekit.store.howler.sot
+package so.howl.common.storekit.db
 
 import so.howl.common.storekit.HowlDatabase
 

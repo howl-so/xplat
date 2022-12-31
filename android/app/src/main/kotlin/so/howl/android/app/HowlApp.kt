@@ -16,8 +16,8 @@ import so.howl.android.common.scoping.SingleIn
 import so.howl.common.storekit.api.HowlApi
 import so.howl.common.storekit.result.RequestResult
 import so.howl.common.storekit.store.howler.converter.toOutput
-import so.howl.common.storekit.store.howler.sot.DriverFactory
-import so.howl.common.storekit.store.howler.sot.HowlDatabaseProvider
+import so.howl.common.storekit.db.DriverFactory
+import so.howl.common.storekit.db.HowlDatabaseProvider
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class, boundType = Application::class)

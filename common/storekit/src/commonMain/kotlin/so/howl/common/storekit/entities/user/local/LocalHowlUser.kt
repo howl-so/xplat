@@ -1,4 +1,4 @@
-package so.howl.common.storekit.store.howler.sot
+package so.howl.common.storekit.entities.user.local
 
 data class LocalHowlUser(
     val id: String,

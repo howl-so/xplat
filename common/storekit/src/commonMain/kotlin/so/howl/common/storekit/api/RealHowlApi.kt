@@ -8,17 +8,16 @@ import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 import so.howl.common.storekit.entities.howler.HowlerId
 import so.howl.common.storekit.entities.howler.network.NetworkHowler
-import so.howl.common.storekit.entities.howler.network.NetworkResponse
 import so.howl.common.storekit.entities.howler.network.RealNetworkHowler
 import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.user.HowlUserId
 import so.howl.common.storekit.entities.user.network.NetworkHowlUser
 import so.howl.common.storekit.entities.user.network.RealNetworkHowlUser
+import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.result.RequestResult
 
 
@@ -81,6 +80,16 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
 
         val networkHowler = response.body<RealNetworkHowlUser>()
         RequestResult.Success(networkHowler)
+    } catch (error: Throwable) {
+        RequestResult.Exception(error)
+    }
+
+    override suspend fun updateHowlUser(howlUser: HowlUser): RequestResult<NetworkHowlUser> = try {
+        val response = client.put("$ROOT_API_URL/users/${howlUser.id}") {
+            setBody(howlUser)
+        }
+        val networkHowlUser = response.body<RealNetworkHowlUser>()
+        RequestResult.Success(networkHowlUser)
     } catch (error: Throwable) {
         RequestResult.Exception(error)
     }

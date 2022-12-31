@@ -8,8 +8,8 @@ import so.howl.common.storekit.entities.user.network.NetworkHowlUser
 import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.entities.user.output.RealHowlUser
 import so.howl.common.storekit.store.StoreOutput
-import so.howl.common.storekit.store.howler.sot.LocalHowlUser
-import so.howl.common.storekit.store.howler.sot.LocalHowler
+import so.howl.common.storekit.entities.user.local.LocalHowlUser
+import so.howl.common.storekit.entities.howler.local.LocalHowler
 
 class HowlerConverterProvider {
     fun provide(): Converter<StoreOutput<NetworkHowler>, StoreOutput<Howler>, LocalHowler> = Converter.Builder<StoreOutput<NetworkHowler>, StoreOutput<Howler>, LocalHowler>()
