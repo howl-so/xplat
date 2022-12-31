@@ -20,7 +20,7 @@ inline fun <reified T> Swiper(
     onItemRemoved: (T, SwipedOutDirection) -> Unit,
     onEmpty: () -> Unit = {},
     swiperController: SwiperController = rememberSwiperController(),
-    stackCount: Int = 2,
+    stackCount: Int = 10,
     paddingBetweenCards: Float = 40f,
     modifier: Modifier = Modifier,
     crossinline renderItem: @Composable (T) -> Unit

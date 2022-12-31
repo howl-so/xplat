@@ -9,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import so.howl.android.feature.home.model.state.HomeTabViewState
 import so.howl.android.feature.home.model.viewmodel.HomeTabViewModel
 
@@ -38,8 +37,9 @@ fun HowlHomeTab(homeTabViewModel: HomeTabViewModel = viewModel()) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(viewState.data.id)
-                AsyncImage(model = viewState.data.avatarUrl, contentDescription = null)
+                Swiper(items = viewState.data, loadNextHowler = {
+
+                })
             }
         }
     }

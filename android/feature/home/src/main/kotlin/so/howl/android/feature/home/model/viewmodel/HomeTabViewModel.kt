@@ -63,13 +63,7 @@ class HomeTabViewModel(
                 }
 
                 is StoreOutput.Data.Collection -> {
-                    println("DATA === $data")
-                    val first = data.items.firstOrNull()
-                    if (first != null) {
-                        setState(HomeTabState(HomeTabViewState.Success(first)))
-                    } else {
-                        setState(HomeTabState(HomeTabViewState.Failure(Exception())))
-                    }
+                    setState(HomeTabState(HomeTabViewState.Success(data.items)))
                 }
 
                 is StoreOutput.Data.Single -> {
