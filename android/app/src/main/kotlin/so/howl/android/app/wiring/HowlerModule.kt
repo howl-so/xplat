@@ -14,16 +14,20 @@ import so.howl.common.storekit.repository.RealHowlerRepository
 import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howler.HowlerKey
 import so.howl.common.storekit.store.howler.HowlerStoreProvider
+import javax.inject.Named
 
 @Module
 @ContributesTo(HowlerScope::class)
 object HowlerModule {
     @SingleIn(HowlerScope::class)
     @Provides
+    @Named("HOWLER_STORE")
     fun provideHowlerStore(api: HowlerApi, database: HowlDatabase): MutableStore<HowlerKey, StoreOutput<Howler>> = HowlerStoreProvider(api, database).provide()
 
     @SingleIn(HowlerScope::class)
     @Provides
-    fun provideHowlerRepository(store: MutableStore<HowlerKey, StoreOutput<Howler>>): HowlerRepository = RealHowlerRepository(store)
+    fun provideHowlerRepository(
+        @Named("HOWLER_STORE") store: MutableStore<HowlerKey, StoreOutput<Howler>>
+    ): HowlerRepository = RealHowlerRepository(store)
 }
 

@@ -31,8 +31,15 @@ android {
 dependencies {
 
     implementation(project(":common:storekit"))
+    implementation(project(":android:common:scoping"))
+    implementation(project(":android:common:navigation"))
+
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
     implementation(libs.dagger.dagger)
     kapt(libs.dagger.compiler)
+    implementation(libs.androidx.viewmodel.compose)
 
     implementation(libs.compose.material3)
 }

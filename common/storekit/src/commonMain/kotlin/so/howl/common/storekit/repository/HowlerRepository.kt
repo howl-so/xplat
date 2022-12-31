@@ -19,6 +19,9 @@ interface HowlerRepository {
 
 @OptIn(ExperimentalStoreApi::class)
 class RealHowlerRepository(private val store: MutableStore<HowlerKey, StoreOutput<Howler>>) : HowlerRepository {
-    override fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<StoreOutput<Howler>>> = store.stream<NetworkHowler>(request)
+    override fun stream(request: StoreReadRequest<HowlerKey>): Flow<StoreReadResponse<StoreOutput<Howler>>> {
+        println("HOWLER STORE ==== $store")
+        return store.stream<NetworkHowler>(request)
+    }
     override suspend fun write(request: StoreWriteRequest<HowlerKey, StoreOutput<Howler>, NetworkHowler>): StoreWriteResponse = store.write(request)
 }

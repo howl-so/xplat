@@ -9,7 +9,9 @@ import so.howl.common.storekit.store.howluser.HowlUserKey
 
 class HowlUserFetcherProvider(private val api: HowlUserApi) {
     fun provide(): Fetcher<HowlUserKey, StoreOutput<NetworkHowlUser>> = Fetcher.of { key ->
+        println("BEFORE REQUIRE ==== $key")
         require(key is HowlUserKey.Read)
+        println("AFTER REQUIRE")
         when (key) {
             is HowlUserKey.Read.ById -> when (val requestResult = api.getHowlUser(key.howlUserId)) {
                 is RequestResult.Exception -> StoreOutput.Error.Exception(requestResult.error)

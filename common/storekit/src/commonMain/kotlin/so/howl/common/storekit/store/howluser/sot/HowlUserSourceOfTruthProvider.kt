@@ -19,19 +19,35 @@ class HowlUserSourceOfTruthProvider(private val database: HowlDatabase) {
                 when (howlUserKey) {
                     is HowlUserKey.Read.ById -> {
                         database.sotHowlUserQueries.getById(howlUserKey.howlUserId).asFlow().collect { sotHowlUserQuery ->
+                            println("SOT HOWL USER QUERY = $sotHowlUserQuery")
                             val sotHowlUser = sotHowlUserQuery.executeAsOne()
+                            println("SOT HOWL USER = $sotHowlUser")
                             val howlerIds = database.sotHowlUserHowlerQueries
                                 .getAllByHowlUserId(sotHowlUser.id)
                                 .executeAsList()
                                 .map { sotHowlUserHowler -> sotHowlUserHowler.howlerId }
-                            sotHowlUser.toLocal(howlerIds)
+                            println("HOWLER IDS = $howlerIds")
+                            try {
+                                emit(sotHowlUser.toLocal(howlerIds))
+
+                            } catch (error: Throwable) {
+                                println("FAILED CONVERTING TO LOCAL $error")
+                            }
                         }
                     }
                 }
             }
         },
         writer = { _, localHowlUser ->
-            database.sotHowlUserQueries.upsert(localHowlUser.toSot())
+            val sot = localHowlUser.toSot()
+            println("CONVERTED LOCAL TO SOT $sot")
+            try {
+                database.sotHowlUserQueries.upsert(sot)
+                println("WROTE TO SOT $sot")
+            } catch (error: Throwable) {
+                println("FAILED UPSERTING SOT $error")
+            }
+
         },
         delete = { howlUserKey ->
             require(howlUserKey is HowlUserKey.Clear.ById)

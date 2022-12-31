@@ -17,6 +17,7 @@ import so.howl.common.storekit.repository.RealHowlUserRepository
 import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howluser.HowlUserKey
 import so.howl.common.storekit.store.howluser.HowlUserStoreProvider
+import javax.inject.Named
 
 @Module
 @ContributesTo(AppScope::class)
@@ -32,9 +33,12 @@ object AppModule {
 
     @SingleIn(AppScope::class)
     @Provides
-    fun provideHowlUserStore(api: HowlApi, database: HowlDatabase): MutableStore<HowlUserKey, StoreOutput<HowlUser>> = HowlUserStoreProvider(api, database).provide()
+    @Named("HOWL_USER_STORE")
+    fun provideHowlUserStore(api: HowlApi, database: HowlDatabase): MutableStore<HowlUserKey, StoreOutput<HowlUser>> =
+        HowlUserStoreProvider(api, database).provide()
 
     @SingleIn(AppScope::class)
     @Provides
-    fun provideHowlUserRepository(store: MutableStore<HowlUserKey, StoreOutput<HowlUser>>): HowlUserRepository = RealHowlUserRepository(store)
+    fun provideHowlUserRepository(@Named("HOWL_USER_STORE") store: MutableStore<HowlUserKey, StoreOutput<HowlUser>>): HowlUserRepository =
+        RealHowlUserRepository(store)
 }

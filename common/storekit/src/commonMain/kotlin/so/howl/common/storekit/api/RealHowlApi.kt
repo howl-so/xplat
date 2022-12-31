@@ -75,12 +75,14 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
     }
 
     override suspend fun getHowlUser(userId: HowlUserId): RequestResult<NetworkHowlUser> = try {
+        println("TRYING")
         val response = client.get("$ROOT_API_URL/users/$userId")
         println("RESPONSE API ==== $response")
 
         val networkHowler = response.body<RealNetworkHowlUser>()
         RequestResult.Success(networkHowler)
     } catch (error: Throwable) {
+        println("FAILED === $error")
         RequestResult.Exception(error)
     }
 
