@@ -12,6 +12,7 @@ import org.mobilenativefoundation.store.store5.StoreReadRequest
 import so.howl.android.feature.home.model.event.HomeTabEvent
 import so.howl.android.feature.home.model.state.HomeTabState
 import so.howl.android.feature.home.model.state.HomeTabViewState
+import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
 import so.howl.common.storekit.entities.howler.output.Howlers
 import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.repository.HowlerRepository
@@ -19,7 +20,7 @@ import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howler.HowlerKey
 
 class HomeTabViewModel(
-    private val user: HowlUser,
+    private val user: AuthenticatedHowlUser,
     private val howlers: Howlers,
     private val howlerRepository: HowlerRepository,
     private val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.Default)

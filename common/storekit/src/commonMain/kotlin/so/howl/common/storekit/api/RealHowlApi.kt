@@ -10,7 +10,9 @@ import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
-import so.howl.common.storekit.entities.auth.network.NetworkAuth
+import so.howl.common.storekit.api.fake.FakeHowlUsers
+import so.howl.common.storekit.api.fake.FakeHowlers
+import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
 import so.howl.common.storekit.entities.howler.HowlerId
 import so.howl.common.storekit.entities.howler.network.NetworkHowler
 import so.howl.common.storekit.entities.howler.network.RealNetworkHowler
@@ -75,9 +77,26 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
         RequestResult.Exception(error)
     }
 
-    override suspend fun authenticate(token: String): RequestResult<NetworkAuth> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun authenticate(token: String): RequestResult<AuthenticatedHowlUser> = RequestResult.Success(
+        with(FakeHowlUsers.Matt) {
+            AuthenticatedHowlUser(
+                id = id,
+                name = name,
+                email = email,
+                username = username,
+                avatarUrl = avatarUrl,
+                howlers = listOf(
+                    AuthenticatedHowlUser.Howler(
+                        id = FakeHowlers.Tag.network.id,
+                        name = FakeHowlers.Tag.network.name,
+                        avatarUrl = FakeHowlers.Tag.network.avatarUrl,
+                        ownerIds = listOf(FakeHowlUsers.Matt.id)
+                    )
+                )
+            )
+        }
+
+    )
 
     override suspend fun getHowlUser(userId: HowlUserId): RequestResult<NetworkHowlUser> = try {
         println("TRYING")

@@ -10,13 +10,13 @@ import org.mobilenativefoundation.store.store5.StoreReadRequest
 import org.mobilenativefoundation.store.store5.StoreReadResponse
 import so.howl.android.feature.account.model.state.AccountTabState
 import so.howl.android.feature.account.model.state.AccountTabViewState
-import so.howl.common.storekit.entities.user.output.HowlUser
+import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
 import so.howl.common.storekit.repository.HowlUserRepository
 import so.howl.common.storekit.store.StoreOutput
 import so.howl.common.storekit.store.howluser.HowlUserKey
 
 class AccountTabViewModel(
-    user: HowlUser,
+    user: AuthenticatedHowlUser,
     private val userRepository: HowlUserRepository,
     viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) : ViewModel() {

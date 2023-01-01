@@ -4,56 +4,43 @@ import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.flow.flow
 import org.mobilenativefoundation.store.store5.SourceOfTruth
 import so.howl.common.storekit.HowlDatabase
-import so.howl.common.storekit.entities.auth.output.Auth
-import so.howl.common.storekit.entities.howler.output.Howler
-import so.howl.common.storekit.entities.howler.output.RealHowler
-import so.howl.common.storekit.entities.user.output.HowlUser
-import so.howl.common.storekit.entities.user.output.RealHowlUser
+import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
 
 class AuthSourceOfTruthProvider(private val database: HowlDatabase) {
-    fun provide(): SourceOfTruth<String, Auth> = SourceOfTruth.of(
+    fun provide(): SourceOfTruth<String, AuthenticatedHowlUser> = SourceOfTruth.of(
         reader = { token: String ->
-            flow<Auth> {
+            flow<AuthenticatedHowlUser> {
                 database.sotAuthQueries.getByToken(token).asFlow().collect { sotAuthQuery ->
                     val sotAuth = sotAuthQuery.executeAsOne()
                     val sotUser = database.sotHowlUserQueries.getById(sotAuth.userId).executeAsOne()
                     val sotHowlers = database.sotHowlUserHowlerQueries.getAllByHowlUserId(sotAuth.userId).executeAsList().map {
                         database.sotHowlerQueries.getById(it.howlerId).executeAsOne()
                     }
-                    val howlers: List<Howler> = sotHowlers.map { sotHowler ->
-                        val sotHowlUsers = database.sotHowlUserHowlerQueries.getAllByHowlerId(sotHowler.id).executeAsList()
-                            .map { sotHowlUserHowler -> database.sotHowlUserQueries.getById(sotHowlUserHowler.howlUserId).executeAsOne() }
-                        val howlUsers: List<HowlUser> = sotHowlUsers.map { sotHowlUser ->
-                            val howlerIds = database.sotHowlUserHowlerQueries.getAllByHowlUserId(sotHowlUser.id).executeAsList().map { it.howlerId }
-                            RealHowlUser(
-                                id = sotHowlUser.id,
-                                name = sotHowlUser.name,
-                                email = sotHowlUser.email,
-                                username = sotHowlUser.username,
-                                avatarUrl = sotHowlUser.avatarUrl,
-                                howlerIds = howlerIds
-                            )
-                        }
 
-                        RealHowler(
+                    val howlers: List<AuthenticatedHowlUser.Howler> = sotHowlers.map { sotHowler ->
+                        val ownerIds = database.sotHowlUserHowlerQueries
+                            .getAllByHowlerId(sotHowler.id)
+                            .executeAsList()
+                            .map { sotHowlUserHowler -> sotHowlUserHowler.howlUserId }
+
+                        AuthenticatedHowlUser.Howler(
                             id = sotHowler.id,
                             name = sotHowler.name,
                             avatarUrl = sotHowler.avatarUrl,
-                            owners = howlUsers
+                            ownerIds = ownerIds
                         )
                     }
 
-                    val user: HowlUser = RealHowlUser(
+                    val user = AuthenticatedHowlUser(
                         id = sotUser.id,
                         name = sotUser.name,
                         email = sotUser.email,
                         username = sotUser.username,
                         avatarUrl = sotUser.avatarUrl,
-                        howlerIds = howlers.map { it.id }
+                        howlers = howlers
                     )
+                    emit(user)
 
-                    val auth = Auth(user, howlers)
-                    emit(auth)
                 }
             }
 
@@ -61,9 +48,7 @@ class AuthSourceOfTruthProvider(private val database: HowlDatabase) {
         writer = { token, auth ->
 
 
-
-
-            database.sotAuthQueries.upsert(token, auth.user.id)
+            database.sotAuthQueries.upsert(token, auth.id)
         }
     )
 }

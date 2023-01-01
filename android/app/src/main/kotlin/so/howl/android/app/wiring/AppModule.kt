@@ -13,7 +13,7 @@ import so.howl.common.storekit.api.HowlApi
 import so.howl.common.storekit.api.HowlerApi
 import so.howl.common.storekit.api.HttpClientProvider
 import so.howl.common.storekit.api.RealHowlApi
-import so.howl.common.storekit.entities.auth.output.Auth
+import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
 import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.repository.AuthRepository
 import so.howl.common.storekit.repository.HowlUserRepository
@@ -37,6 +37,9 @@ object AppModule {
     @Provides
     fun provideHowlerApi(): HowlerApi = RealHowlApi(httpClient)
 
+    @Provides
+    fun provideAuthApi(): AuthApi = RealHowlApi(httpClient)
+
     @SingleIn(AppScope::class)
     @Provides
     @Named("HOWL_USER_STORE")
@@ -51,9 +54,9 @@ object AppModule {
     @SingleIn(AppScope::class)
     @Provides
     @Named("AUTH_STORE")
-    fun provideAuthStore(api: AuthApi, database: HowlDatabase): Store<String, Auth> = AuthStoreProvider(api, database).provide()
+    fun provideAuthStore(api: AuthApi, database: HowlDatabase): Store<String, AuthenticatedHowlUser> = AuthStoreProvider(api, database).provide()
 
     @SingleIn(AppScope::class)
     @Provides
-    fun provideAuthRepository(@Named("AUTH_STORE") store: Store<String, Auth>): AuthRepository = RealAuthRepository(store)
+    fun provideAuthRepository(@Named("AUTH_STORE") store: Store<String, AuthenticatedHowlUser>): AuthRepository = RealAuthRepository(store)
 }

@@ -20,11 +20,7 @@ import so.howl.android.app.wiring.UserComponent
 import so.howl.android.common.hig.HigTheme
 import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.UserDependencies
-import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.howler.output.Howlers
-import so.howl.common.storekit.entities.howler.output.RealHowler
-import so.howl.common.storekit.entities.user.output.RealHowlUser
-import so.howl.common.storekit.result.RequestResult
 
 class HowlMainActivity : ComponentActivity(), ComponentHolder {
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -37,29 +33,12 @@ class HowlMainActivity : ComponentActivity(), ComponentHolder {
         super.onCreate(savedInstanceState)
         coroutineScope.launch {
             val userComponent: UserComponent = (application as HowlApp).userComponent.invoke()
-            println("HITTING AFTER USER COMPONENT")
             val howlerComponentFactory = (userComponent as HowlerComponent.ParentBindings).howlerComponentFactory()
-
             val userDependencies = userComponent as UserDependencies
-            val response = userDependencies.howlerApi.getHowlersByOwnerId(userComponent.user.id)
-            if (response is RequestResult.Success) {
-                val howlers: List<Howler> = response.data.map {
-                    RealHowler(
-                        it.id,
-                        it.name,
-                        it.avatarUrl,
-                        it.owners.map { RealHowlUser(it.id, it.name, it.email, it.username, it.avatarUrl, it.howlerIds) })
-                }
-                val howlerComponent: HowlerComponent = howlerComponentFactory.create(Howlers.from(howlers))
-                component = Pair(userComponent, howlerComponent)
-                println("SUCCESS == $response")
-                initialized.value = true
-            } else {
-                println("RESPONSE === $response")
-                component = Pair(userComponent, null)
-                initialized.value = true
-            }
-
+            val howlerComponent: HowlerComponent = howlerComponentFactory.create(Howlers.from(userDependencies.user.howlers))
+            println("HITTING AFTER HOWLER COMPONENT")
+            component = Pair(userComponent, howlerComponent)
+            initialized.value = true
         }
 
         setContent {

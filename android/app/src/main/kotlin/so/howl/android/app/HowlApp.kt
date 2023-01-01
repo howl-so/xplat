@@ -17,6 +17,7 @@ import so.howl.android.common.scoping.SingleIn
 import so.howl.common.storekit.api.HowlApi
 import so.howl.common.storekit.db.DriverFactory
 import so.howl.common.storekit.db.HowlDatabaseProvider
+import so.howl.common.storekit.repository.AuthRepository
 import so.howl.common.storekit.repository.HowlUserRepository
 import so.howl.common.storekit.store.howluser.HowlUserKey
 
@@ -30,10 +31,12 @@ class HowlApp : Application(), ComponentHolder {
 
     private val api: HowlApi by lazy { component.appDependencies().api }
     private val userRepository: HowlUserRepository by lazy { component.appDependencies().userRepository }
+    private val authRepository: AuthRepository by lazy { component.appDependencies().authRepository }
 
     val userComponent = coroutineScope.suspendLazy {
-        val firstUser = userRepository.first(StoreReadRequest.cached(HowlUserKey.Read.ById(HOWL_USER_ID), refresh = false))
-        userComponentFactory.create(firstUser)
+        val user = authRepository.authenticate(TOKEN)
+        println("USER === $user")
+        userComponentFactory.create(user)
     }
 
     override fun onCreate() {
@@ -46,14 +49,13 @@ class HowlApp : Application(), ComponentHolder {
                 database = database,
                 applicationContext = applicationContext
             )
-            userRepository.prefetch(StoreReadRequest.fresh(HowlUserKey.Read.ById(HOWL_USER_ID)))
-
         }
     }
 
     companion object {
         private const val HOWL_USER_ID = "14b357602998f909e8b17ac9"
         private const val REFRESH = true
+        private const val TOKEN = "TOKEN"
     }
 
     private fun AppComponent.userComponentFactory() = (this as UserComponent.ParentBindings).userComponentFactory()
