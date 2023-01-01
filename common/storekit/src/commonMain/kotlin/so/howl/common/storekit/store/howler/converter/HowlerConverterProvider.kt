@@ -1,15 +1,15 @@
 package so.howl.common.storekit.store.howler.converter
 
 import org.mobilenativefoundation.store.store5.Converter
+import so.howl.common.storekit.entities.howler.local.LocalHowler
 import so.howl.common.storekit.entities.howler.network.NetworkHowler
 import so.howl.common.storekit.entities.howler.output.Howler
 import so.howl.common.storekit.entities.howler.output.RealHowler
+import so.howl.common.storekit.entities.user.local.LocalHowlUser
 import so.howl.common.storekit.entities.user.network.NetworkHowlUser
 import so.howl.common.storekit.entities.user.output.HowlUser
 import so.howl.common.storekit.entities.user.output.RealHowlUser
 import so.howl.common.storekit.store.StoreOutput
-import so.howl.common.storekit.entities.user.local.LocalHowlUser
-import so.howl.common.storekit.entities.howler.local.LocalHowler
 
 class HowlerConverterProvider {
     fun provide(): Converter<StoreOutput<NetworkHowler>, StoreOutput<Howler>, LocalHowler> = Converter.Builder<StoreOutput<NetworkHowler>, StoreOutput<Howler>, LocalHowler>()
@@ -21,6 +21,7 @@ class HowlerConverterProvider {
                     println("EXCEPTION IN CONVERTER")
                     StoreOutput.Error.Exception(network.error)
                 }
+
                 is StoreOutput.Error.Message -> StoreOutput.Error.Message(network.error)
             }
         }
@@ -57,7 +58,7 @@ fun NetworkHowlUser.toOutput(): HowlUser = RealHowlUser(
 
 fun LocalHowler.toOutput(): StoreOutput<Howler> = when (this) {
     is LocalHowler.Collection -> StoreOutput.Data.Collection(howlers.map { it.toOutput() })
-    is LocalHowler.Single -> StoreOutput.Data.Single(this.toOutput())
+    is LocalHowler.Single -> StoreOutput.Data.Single(toOutput())
 }
 
 fun LocalHowler.Single.toOutput(): Howler = RealHowler(

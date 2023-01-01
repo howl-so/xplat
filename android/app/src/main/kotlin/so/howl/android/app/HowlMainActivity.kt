@@ -41,7 +41,6 @@ class HowlMainActivity : ComponentActivity(), ComponentHolder {
             val howlerComponentFactory = (userComponent as HowlerComponent.ParentBindings).howlerComponentFactory()
 
             val userDependencies = userComponent as UserDependencies
-
             val response = userDependencies.howlerApi.getHowlersByOwnerId(userComponent.user.id)
             if (response is RequestResult.Success) {
                 val howlers: List<Howler> = response.data.map {

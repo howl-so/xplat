@@ -1,0 +1,21 @@
+CREATE TABLE sotAuth(
+  token TEXT UNIQUE NOT NULL,
+  userId TEXT UNIQUE NOT NULL
+);
+
+getByToken:
+SELECT *
+FROM sotAuth
+WHERE token = ?;
+
+upsert:
+INSERT OR REPLACE INTO sotAuth
+VALUES (?, ?);
+
+clearByToken:
+DELETE
+FROM sotAuth
+WHERE token = ?;
+
+clearAll:
+DELETE FROM sotAuth;
