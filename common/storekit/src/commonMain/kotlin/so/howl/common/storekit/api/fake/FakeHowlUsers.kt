@@ -11,7 +11,7 @@ object FakeHowlUsers {
         override val email: String = "matt@howl.so"
         override val username: String = "matt"
         override val avatarUrl: String = "https://avatars.githubusercontent.com/u/59468153?v=4"
-        override val howlerIds: List<HowlerId> = listOf("a")
+        override val howlerIds: List<HowlerId> = listOf("afe38e7bce9533d8a4e0a802")
     }
 
     val Ty = object : HowlUser {

@@ -9,7 +9,7 @@ import so.howl.common.storekit.entities.user.output.HowlUser
 
 object FakeHowlers {
     object Tag {
-        private const val ID: HowlerId = "a"
+        private const val ID: HowlerId = "afe38e7bce9533d8a4e0a802"
         private const val NAME: String = "Tag"
         private const val AVATAR_URL: String = "https://user-images.githubusercontent.com/59468153/205462443-019b653c-689f-40d4-9677-ccc184ecaad6.png"
         private val OWNERS: List<HowlUser> = listOf(FakeHowlUsers.Matt)

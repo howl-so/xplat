@@ -4,7 +4,6 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import org.mobilenativefoundation.store.store5.MutableStore
-import org.mobilenativefoundation.store.store5.Store
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
 import so.howl.common.storekit.HowlDatabase
@@ -54,9 +53,9 @@ object AppModule {
     @SingleIn(AppScope::class)
     @Provides
     @Named("AUTH_STORE")
-    fun provideAuthStore(api: AuthApi, database: HowlDatabase): Store<String, AuthenticatedHowlUser> = AuthStoreProvider(api, database).provide()
+    fun provideAuthStore(api: AuthApi, database: HowlDatabase): MutableStore<String, AuthenticatedHowlUser> = AuthStoreProvider(api, database).provide()
 
     @SingleIn(AppScope::class)
     @Provides
-    fun provideAuthRepository(@Named("AUTH_STORE") store: Store<String, AuthenticatedHowlUser>): AuthRepository = RealAuthRepository(store)
+    fun provideAuthRepository(@Named("AUTH_STORE") store: MutableStore<String, AuthenticatedHowlUser>): AuthRepository = RealAuthRepository(store)
 }

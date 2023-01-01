@@ -54,6 +54,7 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
     }
 
     override suspend fun getHowlers(howlerId: HowlerId, start: Int, size: Int): RequestResult<List<NetworkHowler>> = try {
+        println("GETTING HOWLERS FOR HOWLER ID === $howlerId")
         val response = client.get("$ROOT_API_URL/howlers?howlerId=${howlerId}&start=${start}&size=${size}")
         val networkHowlers = response.body<List<RealNetworkHowler>>()
         RequestResult.Success(networkHowlers)
@@ -77,7 +78,7 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
         RequestResult.Exception(error)
     }
 
-    override suspend fun authenticate(token: String): RequestResult<AuthenticatedHowlUser> = RequestResult.Success(
+    override suspend fun validate(token: String): RequestResult<AuthenticatedHowlUser> = RequestResult.Success(
         with(FakeHowlUsers.Matt) {
             AuthenticatedHowlUser(
                 id = id,
@@ -97,6 +98,10 @@ class RealHowlApi(private val client: HttpClient) : HowlApi {
         }
 
     )
+
+    override suspend fun invalidate(userId: String, token: String): RequestResult<Boolean> {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun getHowlUser(userId: HowlUserId): RequestResult<NetworkHowlUser> = try {
         println("TRYING")
