@@ -13,7 +13,15 @@
         android:icon="@mipmap/ic_launcher_round">
 
         <activity
-            android:name=".HowlMainActivity"
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

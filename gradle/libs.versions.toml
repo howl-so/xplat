@@ -35,6 +35,8 @@ anvil-gradle-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", ve
 androidx-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodel" }
 androidx-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "viewmodel" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version = "1.5.4" }
+datastore-preferences = {group = "androidx.datastore", name = "datastore-preferences", version = "1.0.0"}
+
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 
 componentbox-core = { group = "com.dropbox.componentbox", name = "componentbox", version.ref = "componentbox" }

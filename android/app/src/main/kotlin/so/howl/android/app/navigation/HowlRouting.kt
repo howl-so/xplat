@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import so.howl.android.app.HowlApp
-import so.howl.android.app.HowlMainActivity
+import so.howl.android.app.MainActivity
 import so.howl.android.app.wiring.AppDependencies
 import so.howl.android.common.navigation.Screen
 import so.howl.android.common.scoping.HowlerDependencies
@@ -24,7 +24,7 @@ import so.howl.android.feature.home.model.viewmodel.HomeTabViewModel
 fun HowlRouting(navController: NavHostController, innerPadding: PaddingValues) {
 
     val app = LocalContext.current.applicationContext as HowlApp
-    val mainActivity = LocalContext.current as HowlMainActivity
+    val mainActivity = LocalContext.current as MainActivity
 
     val appComponent = app.component
     val userComponent = mainActivity.component.first

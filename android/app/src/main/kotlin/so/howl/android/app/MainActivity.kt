@@ -22,7 +22,7 @@ import so.howl.android.common.scoping.ComponentHolder
 import so.howl.android.common.scoping.UserDependencies
 import so.howl.common.storekit.entities.howler.output.Howlers
 
-class HowlMainActivity : ComponentActivity(), ComponentHolder {
+class MainActivity : ComponentActivity(), ComponentHolder {
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     override lateinit var component: Pair<UserComponent, HowlerComponent?>

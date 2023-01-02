@@ -1,6 +1,8 @@
 package so.howl.android.app
 
+import android.app.Activity
 import android.app.Application
+import androidx.activity.ComponentActivity
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,6 +60,8 @@ class HowlApp : Application(), ComponentHolder {
         private const val TOKEN = "TOKEN"
     }
 
-    private fun AppComponent.userComponentFactory() = (this as UserComponent.ParentBindings).userComponentFactory()
-    private fun AppComponent.appDependencies() = this as AppDependencies
 }
+
+internal fun AppComponent.userComponentFactory() = (this as UserComponent.ParentBindings).userComponentFactory()
+internal fun AppComponent.appDependencies() = this as AppDependencies
+fun Activity.howlApp(): HowlApp = application as HowlApp
