@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import so.howl.android.app.auth.TOKEN_KEY
+import so.howl.android.app.auth.model.event.LoginEvent
 import so.howl.android.app.auth.model.state.LoginState
 import so.howl.android.app.auth.model.state.LoginViewState
 import so.howl.common.storekit.repository.AuthRepository
@@ -25,6 +26,14 @@ class LoginViewModel(
 
     private fun setState(state: LoginState) {
         stateFlow.value = state
+    }
+
+    fun handleEvent(event: LoginEvent){
+        when (event) {
+            is LoginEvent.TryLogIn -> {
+                // TODO()
+            }
+        }
     }
 
     init {

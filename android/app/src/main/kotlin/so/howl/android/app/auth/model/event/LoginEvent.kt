@@ -1,7 +1,5 @@
 package so.howl.android.app.auth.model.event
 
 sealed class LoginEvent {
-    data class EnterUsername(val value: String) : LoginEvent()
-    data class EnterPassword(val value: String) : LoginEvent()
-    object TryLogIn : LoginEvent()
+    data class TryLogIn(val username: String, val password: String) : LoginEvent()
 }
