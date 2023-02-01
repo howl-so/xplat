@@ -1,5 +1,7 @@
 package so.howl.android.app
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +30,6 @@ class MainActivity : ComponentActivity(), ComponentHolder {
     override lateinit var component: Pair<UserComponent, HowlerComponent?>
 
     private val initialized = MutableStateFlow(false)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         coroutineScope.launch {

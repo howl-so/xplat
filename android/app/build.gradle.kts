@@ -12,7 +12,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "so.howl.android"
+        applicationId = "so.howl.android.app"
         minSdk = 24
         targetSdk = 33
     }
@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":android:feature:account"))
     implementation(project(":android:feature:home"))
     implementation(project(":common:storekit"))
+    implementation("com.google.android.gms:play-services-auth:20.4.1")
 
     implementation(libs.activity.compose)
     implementation(libs.androidx.viewmodel)

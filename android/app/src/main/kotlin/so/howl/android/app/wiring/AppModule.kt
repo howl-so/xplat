@@ -3,6 +3,7 @@ package so.howl.android.app.wiring
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import io.ktor.client.HttpClient
 import org.mobilenativefoundation.store.store5.MutableStore
 import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
@@ -57,5 +58,5 @@ object AppModule {
 
     @SingleIn(AppScope::class)
     @Provides
-    fun provideAuthRepository(@Named("AUTH_STORE") store: MutableStore<String, AuthenticatedHowlUser>): AuthRepository = RealAuthRepository(store)
+    fun provideAuthRepository(@Named("AUTH_STORE") store: MutableStore<String, AuthenticatedHowlUser>): AuthRepository = RealAuthRepository(store, httpClient)
 }

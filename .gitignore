@@ -16,3 +16,4 @@ local.properties
 .idea/
 /.idea/*
 /.idea/
+./android/app/src/main/res/values/secrets.xml

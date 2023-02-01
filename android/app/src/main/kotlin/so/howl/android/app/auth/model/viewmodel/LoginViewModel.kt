@@ -28,6 +28,12 @@ class LoginViewModel(
         stateFlow.value = state
     }
 
+    suspend fun setToken(token: String) {
+        authDataStore.edit {
+            it[stringPreferencesKey(TOKEN_KEY)] = token
+        }
+    }
+
     fun handleEvent(event: LoginEvent){
         when (event) {
             is LoginEvent.TryLogIn -> {
@@ -42,7 +48,7 @@ class LoginViewModel(
 
             // try to load token from data store
             val token = authDataStore.tokenOrNull()
-
+            println("TOKEN === $token")
             // if token, try load user
             // if user, set user
             // else, clear token
@@ -51,9 +57,12 @@ class LoginViewModel(
                 setState(LoginState(LoginViewState.Token.Loading))
                 // TODO(): Cached, not fresh
                 try {
-                    val user = authRepository.authenticate(token)
+                    println("TRYING TO AUTH USER")
+                    val user = authRepository.validateToken(token)
+                    println("USER = $user")
                     setState(LoginState(LoginViewState.Token.Data(user, token)))
                 } catch (error: Throwable) {
+                    println("ERROR = $error")
                     setState(LoginState(LoginViewState.Token.Error(error)))
                     authDataStore.edit { preferences -> preferences.remove(stringPreferencesKey(TOKEN_KEY)) }
                     setState(LoginState(LoginViewState.NoToken.WaitingForUserToSubmit))
