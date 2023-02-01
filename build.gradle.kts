@@ -17,7 +17,6 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform") version libs.versions.kotlin.get() apply false
 }
 
-
 allprojects {
     group = "so.howl"
 

@@ -27,6 +27,7 @@ fun HowlAccountTab(viewModel: AccountTabViewModel = viewModel()) {
             Column {
                 Text(text = "Success")
                 Text(text = viewState.user.id)
+                Text(text = viewState.user.name)
             }
         }
     }

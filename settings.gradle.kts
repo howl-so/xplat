@@ -7,6 +7,9 @@ pluginManagement {
 
         val kmmBridgeVersion = extra["kmmBridgeVersion"] as String
         id("co.touchlab.faktory.kmmbridge").version(kmmBridgeVersion)
+
+        val kotlinVersion = "1.7.10"
+        id("org.jetbrains.kotlin.plugin.parcelize").version(kotlinVersion)
     }
 
     repositories {

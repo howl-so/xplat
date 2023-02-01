@@ -7,7 +7,6 @@ import so.howl.android.common.scoping.AppScope
 import so.howl.android.common.scoping.SingleIn
 import so.howl.android.common.scoping.UserScope
 import so.howl.common.storekit.entities.auth.AuthenticatedHowlUser
-import so.howl.common.storekit.entities.user.output.HowlUser
 
 @SingleIn(UserScope::class)
 @ContributesSubcomponent(scope = UserScope::class, parentScope = AppScope::class)

@@ -6,6 +6,7 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("com.squareup.anvil")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {

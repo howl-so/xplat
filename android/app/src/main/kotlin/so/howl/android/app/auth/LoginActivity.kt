@@ -45,6 +45,7 @@ import so.howl.android.app.appDependencies
 import so.howl.android.app.auth.model.state.LoginViewState
 import so.howl.android.app.auth.model.viewmodel.LoginViewModel
 import so.howl.android.app.howlApp
+import so.howl.android.app.parcelizable
 import so.howl.android.app.userComponentFactory
 import so.howl.android.app.wiring.AppComponent
 import so.howl.android.app.wiring.AppDependencies
@@ -91,8 +92,9 @@ class LoginActivity : ComponentActivity() {
         userComponentFactory.create(user)
     }
 
-    fun startMainActivity(){
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+    private fun startMainActivity(user: AuthenticatedHowlUser){
+        val intent = MainActivity.getLaunchIntent(applicationContext, user.parcelizable())
+        startActivity(intent)
     }
 
     private fun signIn() {
@@ -126,7 +128,7 @@ class LoginActivity : ComponentActivity() {
             is RequestResult.Success -> {
                 viewModel.value.setToken(response.data.token)
                 createUserComponent(response.data.user)
-                startMainActivity()
+                startMainActivity(response.data.user)
             }
         }
     }
@@ -253,7 +255,7 @@ class LoginActivity : ComponentActivity() {
                     // TODO()
                     LaunchedEffect(viewState.user) {
                         createUserComponent(viewState.user)
-                        startMainActivity()
+                        startMainActivity(viewState.user)
                     }
                     
                     Text(text = "Token - Data")

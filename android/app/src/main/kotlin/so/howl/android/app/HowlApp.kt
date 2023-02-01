@@ -35,12 +35,6 @@ class HowlApp : Application(), ComponentHolder {
     private val userRepository: HowlUserRepository by lazy { component.appDependencies().userRepository }
     private val authRepository: AuthRepository by lazy { component.appDependencies().authRepository }
 
-    val userComponent = coroutineScope.suspendLazy {
-        val user = authRepository.authenticate(TOKEN)
-        println("USER === $user")
-        userComponentFactory.create(user)
-    }
-
     override fun onCreate() {
         super.onCreate()
         val application = this
